@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "239693161613",
+    "project_id": "autocommobiledb",
+    "storage_bucket": "autocommobiledb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239693161613:android:6becddb9db201e7ab2eec4",
+        "android_client_info": {
+          "package_name": "com.leonardomaito.autocommobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239693161613-olbr513jgq8m9ndk31oogubdblp51p80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwngAXuDBqaEsRerroSEv1rdT55xBoCY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239693161613-olbr513jgq8m9ndk31oogubdblp51p80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

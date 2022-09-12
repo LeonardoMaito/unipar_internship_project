@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_700">#FF000000</color>
+    <color name="purple_500">#FF000000</color>
+    <color name="purple_200">#FF000000</color>
+    <color name="teal_200">#FF000000</color>
+    <color name="teal_700">#FF000000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="autocom_blue">#2E4F7E</color>
+    <color name="autocom_blue_backup">#032749</color>
+    <color name="autocom_blueTransparent">#33032749</color>
+    <color name="autocom_blue_end">#05427a</color>
+    <color name="negative_button">#848484</color>
+
+</resources>

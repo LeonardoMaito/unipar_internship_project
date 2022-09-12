@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.leonardomaito.autocommobile.activities.NewOsThirdActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_new_os_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:minHeight="720dp">
+
+        <TextView
+            android:id="@+id/tvServiceOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Ordem de Serviço"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/viewHorizontalBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <View
+            android:id="@+id/viewHorizontalBar"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/autocom_blue"
+            app:layout_constraintBottom_toTopOf="@+id/glViewBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glViewBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="57dp" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Data"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/glCenter"
+            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toTopOf="@+id/glViewBottom" />
+
+        <EditText
+            android:id="@+id/etDateInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/custom_border"
+            android:minHeight="48dp"
+            android:paddingLeft="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvExecuteService"
+            app:layout_constraintEnd_toStartOf="@+id/glCenter"
+            app:layout_constraintHorizontal_bias="0.066"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/custom_border"
+            android:minHeight="48dp"
+            android:paddingLeft="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvExecuteService"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/glCenter"
+            app:layout_constraintTop_toBottomOf="@+id/tvValueInput"
+            app:layout_constraintVertical_bias="0.416" />
+
+        <TextView
+            android:id="@+id/tvValueInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Valor"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.528"
+            app:layout_constraintStart_toStartOf="@+id/glCenter"
+            app:layout_constraintTop_toTopOf="@+id/glViewBottom" />
+
+        <TextView
+            android:id="@+id/tvExecuteService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160dp"
+            android:text="Serviço a Executar"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/viewHorizontalBar" />
+
+        <EditText
+            android:id="@+id/etServiceInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="17"
+            android:inputType="textMultiLine"
+            android:minHeight="100dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/tvExecuteService" />
+
+        <TextView
+            android:id="@+id/tvObservation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Observação"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/etServiceInput" />
+
+        <EditText
+            android:id="@+id/etObservationInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="17"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/tvObservation" />
+
+        <TextView
+            android:id="@+id/tvPaymentForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Forma de Pagamento"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/etObservationInput" />
+
+        <EditText
+            android:id="@+id/etPaymentFormInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="17"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/tvPaymentForm" />
+
+        <android.widget.Button
+            android:id="@+id/btReturnMenuOs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:maxHeight="40dp"
+            android:minWidth="200dp"
+            android:minHeight="50dp"
+            android:text="Concluir"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/etPaymentFormInput" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="373dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glRightMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.93" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLeftMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

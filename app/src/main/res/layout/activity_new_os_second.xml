@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.leonardomaito.autocommobile.activities.NewOsSecondActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_new_os_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:minHeight="720dp">
+
+        <TextView
+            android:id="@+id/tvServiceOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Ordem de Serviço"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/viewHorizontalBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <View
+            android:id="@+id/viewHorizontalBar"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/autocom_blue"
+            app:layout_constraintBottom_toTopOf="@+id/glViewBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glViewBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="57dp" />
+
+        <TextView
+            android:id="@+id/tvBrand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="92dp"
+            android:text="Marca"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/etBrandInput"
+            app:layout_constraintEnd_toEndOf="@id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="@id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/viewHorizontalBar" />
+
+        <EditText
+            android:id="@+id/etBrandInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="17"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvChassi"
+            app:layout_constraintEnd_toEndOf="@id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintStart_toStartOf="@id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
+
+        <TextView
+            android:id="@+id/tvChassi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="N Chassi"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/etChassiInput"
+            app:layout_constraintEnd_toEndOf="@id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="@id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/etBrandInput" />
+
+        <EditText
+            android:id="@+id/etChassiInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="17"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:paddingLeft="8dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/tvChassi" />
+
+        <TextView
+            android:id="@+id/tvKm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="KM"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/etKmInput"
+            app:layout_constraintEnd_toEndOf="@id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.717"
+            app:layout_constraintStart_toEndOf="@id/tvColor"
+            app:layout_constraintTop_toBottomOf="@+id/etYearInput" />
+
+        <EditText
+            android:id="@+id/etKmInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="8"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintStart_toEndOf="@id/etColorInput"
+            app:layout_constraintTop_toBottomOf="@+id/tvKm" />
+
+        <TextView
+            android:id="@+id/tvColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Cor"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.194"
+            app:layout_constraintStart_toStartOf="@id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/etModelNumber"
+            app:layout_constraintBottom_toTopOf="@id/etColorInput"/>
+
+        <EditText
+            android:id="@+id/etColorInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="8"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toStartOf="@id/etKmInput"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/tvColor" />
+
+        <TextView
+            android:id="@+id/tvModelo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:text="Modelo"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/etModelNumber"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/etChassiInput" />
+
+        <EditText
+            android:id="@+id/etModelNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="8"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/etYearInput"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@id/tvModelo"
+            app:layout_constraintBottom_toTopOf="@id/tvColor"/>
+
+        <TextView
+            android:id="@+id/tvYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Ano"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/etYearInput"
+            app:layout_constraintEnd_toEndOf="@id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.65"
+            app:layout_constraintStart_toEndOf="@id/tvModelo"
+            app:layout_constraintTop_toBottomOf="@+id/etChassiInput"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etYearInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:ems="8"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            app:layout_constraintEnd_toStartOf="@id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/etModelNumber"
+            app:layout_constraintTop_toBottomOf="@id/tvYear"
+            app:layout_constraintBottom_toTopOf="@id/tvKm"/>
+
+        <android.widget.Button
+            android:id="@+id/btNextOs2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:maxHeight="40dp"
+            android:minWidth="200dp"
+            android:minHeight="50dp"
+            android:text="Avançar"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/etColorInput" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glRightMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.93" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLeftMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

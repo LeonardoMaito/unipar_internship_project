@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:id="@+id/layout_header">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/headerBottomGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="73dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/headerTopGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="54dp" />
+
+        <View
+            android:id="@+id/headerViewBar"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@color/autocom_blue"
+            app:layout_constraintBottom_toTopOf="@+id/headerBottomGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/headerTopGuideline"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/ivHeaderLoggedImage"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/headerTopGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/custom_user_icon"
+            android:contentDescription="Icone de Usuario" />
+
+        <TextView
+            android:id="@+id/tvHeaderLoggedUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usuario"
+            android:textColor="@color/autocom_blue"
+            app:layout_constraintBottom_toTopOf="@+id/headerTopGuideline"
+            app:layout_constraintStart_toEndOf="@+id/ivHeaderLoggedImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/headerMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:contentDescription="Menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/custom_vertical_menu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

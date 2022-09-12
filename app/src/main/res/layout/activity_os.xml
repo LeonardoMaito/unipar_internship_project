@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_os"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
+        android:background="@color/white"
+        tools:context="com.leonardomaito.autocommobile.activities.OsActivity">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/layout_header_search" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glRecyclerLimit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="124dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewOs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="650dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/glRecyclerLimit"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/layout_os_item" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btNewOs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Inserir OS"
+            android:onClick="createNewOs"
+            android:src="@drawable/custom_plus_icon"
+            app:backgroundTint="@color/autocom_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.98"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/glRecyclerLimit"
+            app:layout_constraintVertical_bias="0.988"
+            app:rippleColor="@color/autocom_blue" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

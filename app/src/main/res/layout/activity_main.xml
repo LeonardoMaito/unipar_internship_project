@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.leonardomaito.autocommobile.activities.MainActivity"
+    android:id="@+id/svMain">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        tools:context=".MainActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLimitLoginLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.13" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLimitLoginRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8515815" />
+
+        <EditText
+            android:id="@+id/etEmailInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@drawable/custom_border"
+            android:drawableStart="@drawable/custom_email_icon"
+            android:hint="E-Mail"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/glLimitLoginBottom"
+            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
+            app:layout_constraintTop_toBottomOf="@+id/tvLogin"
+            app:layout_constraintVertical_bias="0.218" />
+
+        <EditText
+            android:id="@+id/etPasswordInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_border"
+            android:drawableStart="@drawable/custom_lock_icon"
+            android:hint="Senha"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/autocom_blue"
+            android:textColorHint="@color/autocom_blue"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/glLimitLoginBottom"
+            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
+            app:layout_constraintTop_toBottomOf="@+id/etEmailInput"
+            app:layout_constraintVertical_bias="0.079" />
+
+        <android.widget.Button
+            android:id="@+id/btLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_button"
+            android:onClick="login"
+            android:text="Acessar"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
+            app:layout_constraintHorizontal_bias="0.522"
+            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
+            app:layout_constraintTop_toTopOf="@+id/glLimitLoginBottom"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvVersao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Versão 1.0"
+            android:textAlignment="center"
+            android:textColor="@color/autocom_blue"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
+            app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:text="Login"
+            android:textAlignment="center"
+            android:textColor="@color/autocom_blue"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:contentDescription="AutoCom Logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
+            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
+            app:layout_constraintTop_toBottomOf="@+id/btLogin"
+            app:layout_constraintVertical_bias="0.365"
+            app:srcCompat="@drawable/custom_login_logo" />
+
+        <Spinner
+            android:id="@+id/spEmpresa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/custom_spinner_bg"
+            android:contentDescription="spinnerEmpresa"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/glLimitLoginBottom"
+            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordInput"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageButton
+            android:id="@+id/btAliasConfig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:contentDescription="AliasConfig"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:onClick="openAliasConfig"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.98"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.01"
+            app:srcCompat="@drawable/custom_settings_img" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glLimitLoginBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="418dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
