@@ -10,23 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.leonardomaito.autocommobile.models.ServiceDocument;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 
 import autocommobile.R;
 
 
-public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceOrder, FirestoreAdapter.ViewHolder> {
+public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, FirestoreAdapter.ViewHolder> {
 
-    public FirestoreAdapter(@NonNull FirestoreRecyclerOptions<ServiceOrder> options) {
+    public FirestoreAdapter(@NonNull FirestoreRecyclerOptions<ServiceDocument> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull ServiceOrder model) {
-        holder.osIdItem.setText(String.valueOf(model.getId()));
-        holder.osClientItem.setText(model.getPaymentForm());
-        holder.osDateItem.setText(model.getPaymentForm());
-        holder.osValueItem.setText(String.valueOf(model.getTotalValue()));
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull ServiceDocument model) {
+        holder.osIdItem.setText(String.valueOf(model.serviceOrderArray.get(position).getId()));
+        holder.osClientItem.setText(model.serviceOrderArray.get(position).getPaymentForm());
+        holder.osDateItem.setText(model.serviceOrderArray.get(position).getPaymentForm());
+        holder.osValueItem.setText(String.valueOf(model.serviceOrderArray.get(position).getTotalValue()));
     }
 
     @NonNull
