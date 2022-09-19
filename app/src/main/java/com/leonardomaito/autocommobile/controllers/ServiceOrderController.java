@@ -14,6 +14,7 @@ import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,11 +26,10 @@ public class ServiceOrderController {
     private String osObservation;
     private String osPaymentForm;
     private double osValue;
-    private Map<String, Object> updateMap = new HashMap();
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    DocumentReference docRef =
+    private ArrayList<Object> serviceArray = new ArrayList<>();
+    private Map<String, ArrayList> updateMap = new HashMap<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference docRef =
             db.collection("cliente")
                     .document("clienteTeste");
 
@@ -55,7 +55,8 @@ public class ServiceOrderController {
 
     public void sendDataToFirestore(ServiceOrder serviceOrder){
 
-        updateMap.put("ServiceOrder", serviceOrder);
+        serviceArray.add(serviceOrder);
+        updateMap.put("serviceOrder", serviceArray);
 
         docRef.set(updateMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
