@@ -1,7 +1,5 @@
 package com.leonardomaito.autocommobile.models;
 
-
-
 import com.google.firebase.firestore.PropertyName;
 
 import java.util.List;
@@ -12,7 +10,6 @@ public class ServiceDocument {
 
     public ServiceDocument() {
     }
-
 
     public ServiceDocument(List<ServiceOrder> serviceOrderArray) {
         this.serviceOrderArray = serviceOrderArray;
@@ -27,6 +24,8 @@ public class ServiceDocument {
     public void setServiceOrderArray(List<ServiceOrder> serviceOrderArray) {
         this.serviceOrderArray = serviceOrderArray;
     }
+
+
 
 }
 

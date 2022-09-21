@@ -56,7 +56,7 @@ public class OsActivity extends AppCompatActivity {
                         .setQuery(osRef, ServiceDocument.class)
                         .build();
 
-        listAdapter = new FirestoreAdapter(options);
+         listAdapter = new FirestoreAdapter(options);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(listAdapter);

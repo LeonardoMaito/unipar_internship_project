@@ -29,8 +29,7 @@ public class ServiceOrderController {
     private String osObservation;
     private String osPaymentForm;
     private double osValue;
-   // private ArrayList<Object> serviceArray = new ArrayList<>();
-    private Map<String, Object> updateMap = new HashMap<>();
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference docRef =
             db.collection("cliente")
@@ -57,9 +56,6 @@ public class ServiceOrderController {
     }
 
     public void sendDataToFirestore(ServiceOrder serviceOrder){
-
-        //serviceArray.add(serviceOrder);
-        updateMap.put("serviceOrder", serviceOrder);
 
         docRef.update("serviceOrder", FieldValue.arrayUnion(serviceOrder))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
