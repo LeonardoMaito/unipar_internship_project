@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -38,8 +39,17 @@ public class OsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewOs);
 
+        /*docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    Log.e("RESULTADO","result:" + document.toString());
+                }
+            }
+        });*/
+
         Query query = osRef.orderBy("serviceOrder",
-                Query.Direction.ASCENDING);
+                Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<ServiceDocument> options =
                 new FirestoreRecyclerOptions.Builder<ServiceDocument>()
@@ -50,6 +60,8 @@ public class OsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
+
     }
 
     @Override
