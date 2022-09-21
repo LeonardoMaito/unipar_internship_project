@@ -8,13 +8,16 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,8 +29,8 @@ public class ServiceOrderController {
     private String osObservation;
     private String osPaymentForm;
     private double osValue;
-    private ArrayList<Object> serviceArray = new ArrayList<>();
-    private Map<String, ArrayList> updateMap = new HashMap<>();
+   // private ArrayList<Object> serviceArray = new ArrayList<>();
+    private Map<String, Object> updateMap = new HashMap<>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference docRef =
             db.collection("cliente")
@@ -55,10 +58,10 @@ public class ServiceOrderController {
 
     public void sendDataToFirestore(ServiceOrder serviceOrder){
 
-        serviceArray.add(serviceOrder);
-        updateMap.put("serviceOrder", serviceArray);
+        //serviceArray.add(serviceOrder);
+        updateMap.put("serviceOrder", serviceOrder);
 
-        docRef.set(updateMap)
+        docRef.update("serviceOrder", FieldValue.arrayUnion(serviceOrder))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

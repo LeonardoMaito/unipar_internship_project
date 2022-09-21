@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
-import com.leonardomaito.autocommobile.models.ServiceOrder;
 
 import autocommobile.R;
 
@@ -25,8 +24,8 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull ServiceDocument model) {
         holder.osIdItem.setText(String.valueOf(model.serviceOrderArray.get(position).getId()));
-        holder.osClientItem.setText(model.serviceOrderArray.get(position).getPaymentForm());
-        holder.osDateItem.setText(model.serviceOrderArray.get(position).getPaymentForm());
+        holder.osClientItem.setText(model.serviceOrderArray.get(position).getClient().getName());
+        holder.osDateItem.setText(model.serviceOrderArray.get(position).getDate());
         holder.osValueItem.setText(String.valueOf(model.serviceOrderArray.get(position).getTotalValue()));
     }
 
