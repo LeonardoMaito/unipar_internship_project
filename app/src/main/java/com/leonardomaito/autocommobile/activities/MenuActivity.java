@@ -26,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         tvMenu = findViewById(R.id.tvMainMenu);
-        btOpenOs = findViewById(R.id.btNewOs);
+        btOpenOs = findViewById(R.id.btMenuOs);
 
     }
 
