@@ -24,10 +24,10 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull ServiceDocument model) {
-        holder.osIdItem.setText(String.valueOf(model.serviceOrder.get(position).getId()));
-        holder.osClientItem.setText(model.serviceOrder.get(position).getClient().getName());
-        holder.osDateItem.setText(model.serviceOrder.get(position).getDate());
-        holder.osValueItem.setText(String.valueOf(model.serviceOrder.get(position).getTotalValue()));
+        holder.osIdItem.setText(String.valueOf(model.serviceOrder.getId()));
+        holder.osClientItem.setText(model.serviceOrder.getClient().getName());
+        holder.osDateItem.setText(model.serviceOrder.getDate());
+        holder.osValueItem.setText(String.valueOf("R$: " + model.serviceOrder.getTotalValue()));
 
     }
 
@@ -38,12 +38,6 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.layout_os_item, parent, false);
         return new FirestoreAdapter.ViewHolder(view);
-    }
-
-    @Override
-    public int getItemCount() {
-        Log.e("TITLE","result" + super.getItemCount());
-        return super.getItemCount();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

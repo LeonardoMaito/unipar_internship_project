@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,11 +30,12 @@ public class ServiceOrderController {
     private String osObservation;
     private String osPaymentForm;
     private double osValue;
-
+    Map<String, Object> data = new HashMap<>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference docRef =
+    private CollectionReference docRef =
             db.collection("cliente")
-                    .document("clienteTeste");
+                    .document("clienteTeste")
+                    .collection("ServiceOrder");
 
     public void returnNewServiceOrder(EditText etService, EditText etObservation, EditText etPaymentForm
     , Client newClient, Vehicle newVehicle, EditText etDate, EditText etValue){
@@ -57,18 +59,8 @@ public class ServiceOrderController {
 
     public void sendDataToFirestore(ServiceOrder serviceOrder){
 
-        docRef.update("serviceOrder", FieldValue.arrayUnion(serviceOrder))
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("TAG", "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG", "Error writing document", e);
-                    }
-                });
+        data.put("serviceOrder", serviceOrder);
+        docRef.add(data);
+
     }
 }

@@ -26,8 +26,8 @@ import autocommobile.R;
 public class OsActivity extends AppCompatActivity {
     private FirestoreAdapter listAdapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference osRef = db.collection("cliente");
-    private DocumentReference docRef = osRef.document("clienteTeste");
+    private CollectionReference osRef = db.collection("cliente").document("clienteTeste")
+            .collection("ServiceOrder");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +37,6 @@ public class OsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewOs);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(true);
-
-        /*docRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    Log.e("RESULTADO","result:" + document.toString());
-                }
-            }
-        });*/
 
         Query query = osRef.orderBy("serviceOrder",
                 Query.Direction.ASCENDING);
