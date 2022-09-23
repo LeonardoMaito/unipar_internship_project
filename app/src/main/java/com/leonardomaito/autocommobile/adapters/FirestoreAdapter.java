@@ -1,5 +1,6 @@
 package com.leonardomaito.autocommobile.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
-import com.leonardomaito.autocommobile.models.ServiceOrder;
 
 import autocommobile.R;
 
@@ -24,10 +24,11 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull ServiceDocument model) {
-        holder.osIdItem.setText(String.valueOf(model.serviceOrderArray.get(position).getId()));
-        holder.osClientItem.setText(model.serviceOrderArray.get(position).getPaymentForm());
-        holder.osDateItem.setText(model.serviceOrderArray.get(position).getPaymentForm());
-        holder.osValueItem.setText(String.valueOf(model.serviceOrderArray.get(position).getTotalValue()));
+        holder.osIdItem.setText(String.valueOf(model.serviceOrder.get(position).getId()));
+        holder.osClientItem.setText(model.serviceOrder.get(position).getClient().getName());
+        holder.osDateItem.setText(model.serviceOrder.get(position).getDate());
+        holder.osValueItem.setText(String.valueOf(model.serviceOrder.get(position).getTotalValue()));
+
     }
 
     @NonNull
@@ -35,10 +36,14 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-
         View view = layoutInflater.inflate(R.layout.layout_os_item, parent, false);
-
         return new FirestoreAdapter.ViewHolder(view);
+    }
+
+    @Override
+    public int getItemCount() {
+        Log.e("TITLE","result" + super.getItemCount());
+        return super.getItemCount();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
