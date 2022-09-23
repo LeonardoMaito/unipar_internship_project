@@ -6,23 +6,23 @@ import java.util.List;
 
 public class ServiceDocument {
 
-    public List<ServiceOrder> serviceOrderArray;
+    public List<ServiceOrder> serviceOrder;
 
     public ServiceDocument() {
     }
 
-    public ServiceDocument(List<ServiceOrder> serviceOrderArray) {
-        this.serviceOrderArray = serviceOrderArray;
+    public ServiceDocument(List<ServiceOrder> serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
 
     @PropertyName("serviceOrder")
-    public List<ServiceOrder> getServiceOrderArray() {
-        return serviceOrderArray;
+    public List<ServiceOrder> getServiceOrder() {
+        return serviceOrder;
     }
 
     @PropertyName("serviceOrder")
-    public void setServiceOrderArray(List<ServiceOrder> serviceOrderArray) {
-        this.serviceOrderArray = serviceOrderArray;
+    public void setServiceOrder(List<ServiceOrder> serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
 
 
