@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:minHeight="720dp"
-        tools:context="com.leonardomaito.autocommobile.activities.NewOsActivity">
+        tools:context="com.leonardomaito.autocommobile.activities.ClientActivity">
 
         <TextView
             android:id="@+id/tvServiceOrder"

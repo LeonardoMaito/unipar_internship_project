@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 
@@ -31,7 +30,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void openOsActivity(View view) {
-        Intent osIntent = new Intent(this, OsActivity.class);
+        Intent osIntent = new Intent(this, OsRecyclerActivity.class);
         startActivity(osIntent);
 
     }

@@ -12,7 +12,7 @@ import com.leonardomaito.autocommobile.controllers.VehicleController;
 import com.leonardomaito.autocommobile.models.Client;
 import autocommobile.R;
 
-public class NewOsSecondActivity extends AppCompatActivity {
+public class VehicleActivity extends AppCompatActivity {
 
     private Button startOsSecond;
     private EditText etBrand;
@@ -44,7 +44,7 @@ public class NewOsSecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent newOsStepThirdIntent  = new Intent(getApplicationContext(), NewOsThirdActivity.class);
+                Intent newOsStepThirdIntent  = new Intent(getApplicationContext(), ServiceOrderActivity.class);
 
                 newOsStepThirdIntent.putExtra("novoCliente", newClient);
                 newOsStepThirdIntent.putExtra("novoCarro", vehicleController.returnNewVehicle(etBrand,etModel,

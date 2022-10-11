@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.leonardomaito.autocommobile.controllers.ClientController;
 import autocommobile.R;
 
-public class NewOsActivity extends AppCompatActivity {
+public class ClientActivity extends AppCompatActivity {
 
     public Button nextOsStep;
     public EditText etClientName;
@@ -22,6 +22,7 @@ public class NewOsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_os);
 
@@ -35,14 +36,14 @@ public class NewOsActivity extends AppCompatActivity {
 
         ClientController clientController = new ClientController();
 
+
         nextOsStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(clientController.verifyClientCpf(etClientCpf, nextOsStep)
-                && clientController.verifyClientName(etClientName, nextOsStep)) {
+                if(clientController.checkAllClientFields(etClientName, etClientCpf, nextOsStep)) {
 
-                    Intent newOsStepSecondIntent  = new Intent(getApplicationContext(), NewOsSecondActivity.class);
+                    Intent newOsStepSecondIntent  = new Intent(getApplicationContext(), VehicleActivity.class);
 
                     newOsStepSecondIntent.putExtra("novoCliente",clientController.returnNewClient(etClientName,etClientCpf,
                             etClientAddress,etClientTelephone, nextOsStep));
@@ -50,7 +51,6 @@ public class NewOsActivity extends AppCompatActivity {
                     startActivity(newOsStepSecondIntent);
 
                 }
-
             }
         });
     }

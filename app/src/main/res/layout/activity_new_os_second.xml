@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.leonardomaito.autocommobile.activities.NewOsSecondActivity">
+    tools:context="com.leonardomaito.autocommobile.activities.VehicleActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_new_os_2"

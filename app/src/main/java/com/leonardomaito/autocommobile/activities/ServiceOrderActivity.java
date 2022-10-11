@@ -13,13 +13,12 @@ import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.Vehicle;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
 import autocommobile.R;
 
-public class NewOsThirdActivity extends AppCompatActivity {
+public class ServiceOrderActivity extends AppCompatActivity {
 
     private Button returnMenuOs;
     private EditText etService;
@@ -34,8 +33,6 @@ public class NewOsThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_os_third);
 
-        ServiceOrderController serviceOrderController = new ServiceOrderController();
-
         Bundle data = getIntent().getExtras();
         Client newClient = data.getParcelable("novoCliente");
         Vehicle newVehicle =  data.getParcelable("novoCarro");
@@ -44,22 +41,30 @@ public class NewOsThirdActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         returnMenuOs = findViewById(R.id.btReturnMenuOs);
+        returnMenuOs.setBackgroundColor(getResources().getColor(R.color.negative_button));
+
         etService = findViewById(R.id.etServiceInput);
         etObservation = findViewById(R.id.etObservationInput);
         etPaymentForm = findViewById(R.id.etPaymentFormInput);
         etDate = findViewById(R.id.etDateInput);
         etDate.setText(formatter.format(currentTime));
         etValue = findViewById(R.id.etValue);
+        etValue.setText("0");
+
+        ServiceOrderController serviceOrderController = new ServiceOrderController();
 
         returnMenuOs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                serviceOrderController.returnNewServiceOrder(etService, etObservation, etPaymentForm, newClient,
-                        newVehicle, etDate, etValue);
+                if (serviceOrderController.checkAllServiceFields(etValue)) {
 
-                Intent intent = new Intent(getApplicationContext(), OsActivity.class);
-                startActivity(intent);
+                    serviceOrderController.returnNewServiceOrder(etService, etObservation, etPaymentForm, newClient,
+                            newVehicle, etDate, etValue);
+
+                    Intent intent = new Intent(getApplicationContext(), OsRecyclerActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

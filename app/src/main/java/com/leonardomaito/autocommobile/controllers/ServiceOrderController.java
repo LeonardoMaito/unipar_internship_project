@@ -1,29 +1,23 @@
 package com.leonardomaito.autocommobile.controllers;
 
-import android.util.Log;
+
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,8 +27,10 @@ public class ServiceOrderController {
     private String osObservation;
     private String osPaymentForm;
     private double osValue;
+    private double value;
     private long idValue;
-    Map<String, Object> data = new HashMap<>();
+    private Map<String, Object> data = new HashMap<>();
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference docRef =
             db.collection("cliente")
@@ -65,15 +61,12 @@ public class ServiceOrderController {
 
     public void sendDataToFirestore(ServiceOrder serviceOrder){
 
-
-
         idRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     idValue =  (long) document.get("id");
-                    Log.e("Result","ID" + idValue);
 
                 }
             }
@@ -84,8 +77,16 @@ public class ServiceOrderController {
             String id = documentReference.getId();
             docRef.document(id).update("serviceOrder.id", FieldValue.increment(idValue));
             idRef.update("id", FieldValue.increment(1));
-            Log.e("Result","Funcionou");
 
         });
+    }
+
+    public boolean checkAllServiceFields(EditText osValue){
+        if(Double.parseDouble(osValue.getText().toString()) <= 0 ){
+            osValue.setError("O valor precisa ser acima de 0");
+            osValue.requestFocus();
+            return false;
+        }
+        return true;
     }
 }

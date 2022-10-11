@@ -21,8 +21,8 @@ public class VehicleController {
         vehicleModel = etModel.getText().toString();
         vehicleColor = etColor.getText().toString();
         vehicleYear = etYear.getText().toString().isEmpty() ? 0 : Integer.parseInt(etYear.getText().toString());
-        vehicleKm = etKm.getText().toString().isEmpty() ? 0 : Integer.parseInt(etKm.getText().toString());
-        vehicleChassi = etChassi.getText().toString().isEmpty() ? 0 : Integer.parseInt(etChassi.getText().toString());
+        vehicleKm = etKm.getText().toString().isEmpty() ? 0 : Double.parseDouble(etKm.getText().toString());
+        vehicleChassi = etChassi.getText().toString().isEmpty() ? 0 : Double.parseDouble(etChassi.getText().toString());
 
         Vehicle newVehicle = new Vehicle.VehicleBuilder(vehicleBrand,vehicleModel)
                 .chassi(vehicleChassi)

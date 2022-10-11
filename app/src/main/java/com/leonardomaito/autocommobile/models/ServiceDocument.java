@@ -2,9 +2,6 @@ package com.leonardomaito.autocommobile.models;
 
 import com.google.firebase.firestore.PropertyName;
 
-import java.util.List;
-import java.util.Map;
-
 public class ServiceDocument {
 
     public ServiceOrder serviceOrder;
@@ -25,8 +22,6 @@ public class ServiceDocument {
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
-
-
 
 }
 

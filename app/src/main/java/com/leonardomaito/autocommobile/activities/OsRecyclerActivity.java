@@ -1,21 +1,19 @@
 package com.leonardomaito.autocommobile.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.leonardomaito.autocommobile.adapters.FirestoreAdapter;
@@ -23,7 +21,7 @@ import com.leonardomaito.autocommobile.models.ServiceDocument;
 
 import autocommobile.R;
 
-public class OsActivity extends AppCompatActivity {
+public class OsRecyclerActivity extends AppCompatActivity {
     private FirestoreAdapter listAdapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference osRef = db.collection("cliente").document("clienteTeste")
@@ -34,12 +32,17 @@ public class OsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_os);
 
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
+
+                DividerItemDecoration.VERTICAL);
+
         RecyclerView recyclerView = findViewById(R.id.recyclerViewOs);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         Query query = osRef.orderBy("serviceOrder",
-                Query.Direction.ASCENDING);
+                Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<ServiceDocument> options =
                 new FirestoreRecyclerOptions.Builder<ServiceDocument>()
@@ -65,7 +68,7 @@ public class OsActivity extends AppCompatActivity {
     }
 
     public void createNewOs(View view) {
-        Intent newOsIntent = new Intent(this, NewOsActivity.class);
+        Intent newOsIntent = new Intent(this, ClientActivity.class);
         startActivity(newOsIntent);
 
     }

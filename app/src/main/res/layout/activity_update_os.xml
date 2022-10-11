@@ -205,19 +205,38 @@
             app:layout_constraintTop_toBottomOf="@+id/tvPaymentForm" />
 
         <android.widget.Button
+            android:id="@+id/btUpdateOs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:maxHeight="40dp"
+            android:minWidth="150dp"
+            android:minHeight="50dp"
+            android:text="Atualizar"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/etPaymentFormInput"
+            app:layout_constraintVertical_bias="0.437" />
+
+        <android.widget.Button
             android:id="@+id/btReturnMenuOs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button"
             android:maxHeight="40dp"
-            android:minWidth="200dp"
+            android:minWidth="150dp"
             android:minHeight="50dp"
             android:text="Concluir"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.946"
             app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
-            app:layout_constraintTop_toBottomOf="@+id/etPaymentFormInput" />
+            app:layout_constraintTop_toBottomOf="@+id/etPaymentFormInput"
+            app:layout_constraintVertical_bias="0.437" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
