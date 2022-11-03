@@ -32,15 +32,6 @@
             android:name="com.leonardomaito.autocommobile.activities.MenuActivity"
             android:exported="false" />
         <activity
-            android:name="com.leonardomaito.autocommobile.activities.UpdateClientActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.leonardomaito.autocommobile.activities.UpdateVehicleActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.leonardomaito.autocommobile.activities.UpdateServiceOrderActivity"
-            android:exported="false" />
-        <activity
             android:name="com.leonardomaito.autocommobile.activities.MainActivity"
             android:exported="true">
             <intent-filter>

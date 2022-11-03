@@ -25,6 +25,7 @@ public class ServiceOrder implements Parcelable {
         this.observation = serviceOrderBuilder.observation;
         this.totalValue = serviceOrderBuilder.value;
         this.date = serviceOrderBuilder.date;
+        this.id= serviceOrderBuilder.id;
 
     }
 
@@ -138,23 +139,25 @@ public class ServiceOrder implements Parcelable {
         private Client client;
         private final String service;
         private final String paymentForm;
-        private final int id;
         private final double value;
         private final String date;
         private String observation;
+        private  int id;
 
         public ServiceOrderBuilder(Client client, Vehicle vehicle,
-                                   String service, String paymentForm,
-                                   int id, double value, String date) {
+                                   String service, String paymentForm
+                                   ,double value, String date) {
             this.client = client;
             this.vehicle = vehicle;
             this.service = service;
             this.paymentForm = paymentForm;
-            this.id = id;
             this.value = value;
             this.date = date;
         }
-
+        public ServiceOrder.ServiceOrderBuilder id(int id) {
+            this.id = id;
+            return this;
+        }
 
         public ServiceOrder.ServiceOrderBuilder observation(String observation) {
             this.observation = observation;

@@ -14,8 +14,13 @@ public class ServiceDocument {
     }
 
     @PropertyName("serviceOrder")
-    public  ServiceOrder  getServiceOrder() {
+    public  ServiceOrder getServiceOrder() {
         return serviceOrder;
+    }
+
+    @PropertyName("id")
+    public Integer getId() {
+        return serviceOrder.getId();
     }
 
     @PropertyName("serviceOrder")

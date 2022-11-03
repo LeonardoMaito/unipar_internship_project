@@ -52,8 +52,9 @@ public class ServiceOrderController {
         osValue = Double.parseDouble(etValue.getText().toString());
 
         ServiceOrder newServiceOrder = new ServiceOrder.ServiceOrderBuilder(newClient,
-                newVehicle,osService,osPaymentForm, 0, osValue, String.valueOf(etDate.getText()))
+                newVehicle,osService,osPaymentForm, osValue, String.valueOf(etDate.getText()))
                 .observation(osObservation)
+                .id(0)
                 .build();
 
         sendDataToFirestore(newServiceOrder);

@@ -1,8 +1,5 @@
 package com.leonardomaito.autocommobile.adapters;
 
-
-
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -21,7 +18,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.leonardomaito.autocommobile.activities.UpdateClientActivity;
+import com.leonardomaito.autocommobile.activities.ClientActivity;
+import com.leonardomaito.autocommobile.activities.OsRecyclerActivity;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
 
 
@@ -36,6 +34,8 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
                     .collection("ServiceOrder");
 
     private AlertDialog alertDialog;
+
+    private int updateOption = 0;
 
     public FirestoreAdapter(@NonNull FirestoreRecyclerOptions<ServiceDocument> options) {
         super(options);
@@ -93,10 +93,14 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
     }
 
     public void updateOs(Integer position, ViewHolder holder){
+
+        updateOption = 1;
         String documentId = getSnapshots().getSnapshot(position).getId();
-        Intent newOsStepSecondIntent  = new Intent(holder.itemView.getContext(), UpdateClientActivity.class);
-        newOsStepSecondIntent.putExtra("documentId", documentId);
-        holder.itemView.getContext().startActivity(newOsStepSecondIntent);
+        Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
+        updateClientActivity.putExtra("documentId", documentId);
+        updateClientActivity.putExtra("updateOption", updateOption);
+        holder.itemView.getContext().startActivity(updateClientActivity);
+        OsRecyclerActivity.self_intent.finish();
 
     }
 

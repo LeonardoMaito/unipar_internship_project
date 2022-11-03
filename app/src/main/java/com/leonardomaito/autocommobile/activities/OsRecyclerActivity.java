@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -27,10 +28,15 @@ public class OsRecyclerActivity extends AppCompatActivity {
     private CollectionReference osRef = db.collection("cliente").document("clienteTeste")
             .collection("ServiceOrder");
 
+    public static Activity self_intent;
+    private int updateOption = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_os);
+
+        self_intent = this;
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
 
@@ -69,7 +75,9 @@ public class OsRecyclerActivity extends AppCompatActivity {
 
     public void createNewOs(View view) {
         Intent newOsIntent = new Intent(this, ClientActivity.class);
+        newOsIntent.putExtra("updateOption",updateOption);
         startActivity(newOsIntent);
+        finish();
 
     }
 }

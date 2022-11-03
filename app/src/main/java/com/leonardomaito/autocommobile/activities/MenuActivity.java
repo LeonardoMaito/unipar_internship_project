@@ -16,6 +16,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private TextView tvMenu;
     private Button btOpenOs;
+    private int updateOption = 0;
 
     private ServiceOrder serviceOrder;
 
@@ -31,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void openOsActivity(View view) {
         Intent osIntent = new Intent(this, OsRecyclerActivity.class);
+        osIntent.putExtra("updateOption", updateOption);
         startActivity(osIntent);
 
     }
