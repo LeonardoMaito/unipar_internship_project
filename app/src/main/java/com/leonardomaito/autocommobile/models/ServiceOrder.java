@@ -1,6 +1,9 @@
 package com.leonardomaito.autocommobile.models;
 
-public class ServiceOrder {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ServiceOrder implements Parcelable {
 
     public Client client;
     public Vehicle vehicle;
@@ -22,8 +25,32 @@ public class ServiceOrder {
         this.observation = serviceOrderBuilder.observation;
         this.totalValue = serviceOrderBuilder.value;
         this.date = serviceOrderBuilder.date;
+        this.id= serviceOrderBuilder.id;
 
     }
+
+    protected ServiceOrder(Parcel in) {
+        client = in.readParcelable(Client.class.getClassLoader());
+        vehicle = in.readParcelable(Vehicle.class.getClassLoader());
+        service = in.readString();
+        observation = in.readString();
+        paymentForm = in.readString();
+        date = in.readString();
+        totalValue = in.readDouble();
+        id = in.readInt();
+    }
+
+    public static final Creator<ServiceOrder> CREATOR = new Creator<ServiceOrder>() {
+        @Override
+        public ServiceOrder createFromParcel(Parcel in) {
+            return new ServiceOrder(in);
+        }
+
+        @Override
+        public ServiceOrder[] newArray(int size) {
+            return new ServiceOrder[size];
+        }
+    };
 
     public String getDate() {
         return date;
@@ -89,29 +116,48 @@ public class ServiceOrder {
         this.paymentForm = paymentForm;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(client, i);
+        parcel.writeParcelable(vehicle, i);
+        parcel.writeString(service);
+        parcel.writeString(observation);
+        parcel.writeString(paymentForm);
+        parcel.writeString(date);
+        parcel.writeDouble(totalValue);
+        parcel.writeInt(id);
+    }
+
     public static class ServiceOrderBuilder {
 
         private Vehicle vehicle;
         private Client client;
         private final String service;
         private final String paymentForm;
-        private final int id;
         private final double value;
         private final String date;
         private String observation;
+        private  int id;
 
         public ServiceOrderBuilder(Client client, Vehicle vehicle,
-                                   String service, String paymentForm,
-                                   int id, double value, String date) {
+                                   String service, String paymentForm
+                                   ,double value, String date) {
             this.client = client;
             this.vehicle = vehicle;
             this.service = service;
             this.paymentForm = paymentForm;
-            this.id = id;
             this.value = value;
             this.date = date;
         }
-
+        public ServiceOrder.ServiceOrderBuilder id(int id) {
+            this.id = id;
+            return this;
+        }
 
         public ServiceOrder.ServiceOrderBuilder observation(String observation) {
             this.observation = observation;

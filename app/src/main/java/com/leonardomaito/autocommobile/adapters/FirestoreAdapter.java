@@ -1,22 +1,41 @@
 package com.leonardomaito.autocommobile.adapters;
 
-import android.util.Log;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.leonardomaito.autocommobile.activities.ClientActivity;
+import com.leonardomaito.autocommobile.activities.OsRecyclerActivity;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
+
 
 import autocommobile.R;
 
-
 public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, FirestoreAdapter.ViewHolder> {
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference docRef =
+            db.collection("cliente")
+                    .document("clienteTeste")
+                    .collection("ServiceOrder");
+
+    private AlertDialog alertDialog;
+
+    private int updateOption = 0;
 
     public FirestoreAdapter(@NonNull FirestoreRecyclerOptions<ServiceDocument> options) {
         super(options);
@@ -24,11 +43,27 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull ServiceDocument model) {
-        holder.osIdItem.setText(String.valueOf(model.serviceOrder.get(position).getId()));
-        holder.osClientItem.setText(model.serviceOrder.get(position).getClient().getName());
-        holder.osDateItem.setText(model.serviceOrder.get(position).getDate());
-        holder.osValueItem.setText(String.valueOf(model.serviceOrder.get(position).getTotalValue()));
+        holder.osIdItem.setText(String.valueOf(model.serviceOrder.getId()));
+        holder.osClientItem.setText(model.serviceOrder.getClient().getName());
+        holder.osDateItem.setText(model.serviceOrder.getDate());
+        holder.osValueItem.setText(String.valueOf("R$: " + model.serviceOrder.getTotalValue()));
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = holder.getBindingAdapterPosition();
+                updateOs(position, holder);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                int position = holder.getBindingAdapterPosition();
+                deleteOs(position, holder);
+                return true;
+            }
+        });
     }
 
     @NonNull
@@ -38,12 +73,6 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.layout_os_item, parent, false);
         return new FirestoreAdapter.ViewHolder(view);
-    }
-
-    @Override
-    public int getItemCount() {
-        Log.e("TITLE","result" + super.getItemCount());
-        return super.getItemCount();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,4 +91,54 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
             osValueItem =  itemView.findViewById(R.id.osValueItem);
         }
     }
+
+    public void updateOs(Integer position, ViewHolder holder){
+
+        updateOption = 1;
+        String documentId = getSnapshots().getSnapshot(position).getId();
+        Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
+        updateClientActivity.putExtra("documentId", documentId);
+        updateClientActivity.putExtra("updateOption", updateOption);
+        holder.itemView.getContext().startActivity(updateClientActivity);
+        OsRecyclerActivity.self_intent.finish();
+
+    }
+
+    public void deleteOs(Integer position, ViewHolder holder) {
+
+        String documentId = getSnapshots().getSnapshot(position).getId();
+        AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
+        alert.setCancelable(false);
+        alert.setTitle("Excluir O.S");
+        alert.setMessage("Você tem certeza que quer excluir essa O.S?");
+        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        docRef.document(documentId)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(holder.itemView.getContext(), "Excluido com sucesso!", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(holder.itemView.getContext(), "Erro ao tentar excluir!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
+        alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog = alert.create();
+        alertDialog.show();
+    }
 }
+

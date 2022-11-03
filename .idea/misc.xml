@@ -50,7 +50,8 @@
         <entry key="app/src/main/res/layout/activity_new_os.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_new_os_second.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_new_os_third.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_os.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_os.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_update_os.xml" value="0.15818725951261223" />
         <entry key="app/src/main/res/layout/content_new_os.xml" value="0.13134057971014493" />
         <entry key="app/src/main/res/layout/custom_header.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dialog_fragment_alias.xml" value="0.25" />

@@ -34,6 +34,7 @@
             android:id="@+id/etEmailInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
             android:autofillHints=""
             android:background="@drawable/custom_border"
             android:drawableStart="@drawable/custom_email_icon"
@@ -44,12 +45,10 @@
             android:textColor="@color/autocom_blue"
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/glLimitLoginBottom"
             app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
-            app:layout_constraintTop_toBottomOf="@+id/tvLogin"
-            app:layout_constraintVertical_bias="0.218" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
 
         <EditText
             android:id="@+id/etPasswordInput"
@@ -66,7 +65,6 @@
             android:textColor="@color/autocom_blue"
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/glLimitLoginBottom"
             app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
@@ -77,18 +75,17 @@
             android:id="@+id/btLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="200dp"
-            android:layout_marginTop="16dp"
             android:background="@drawable/custom_button"
+            android:minWidth="200dp"
             android:onClick="login"
             android:text="Acessar"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
-            app:layout_constraintHorizontal_bias="0.522"
+            app:layout_constraintHorizontal_bias="0.536"
             app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
-            app:layout_constraintTop_toTopOf="@+id/glLimitLoginBottom"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordInput"
+            app:layout_constraintVertical_bias="0.213" />
 
         <TextView
             android:id="@+id/tvVersao"
@@ -134,45 +131,6 @@
             app:layout_constraintTop_toBottomOf="@+id/btLogin"
             app:layout_constraintVertical_bias="0.365"
             app:srcCompat="@drawable/custom_login_logo" />
-
-        <Spinner
-            android:id="@+id/spEmpresa"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
-            android:background="@drawable/custom_spinner_bg"
-            android:contentDescription="spinnerEmpresa"
-            android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/glLimitLoginBottom"
-            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordInput"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <ImageButton
-            android:id="@+id/btAliasConfig"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:contentDescription="AliasConfig"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:onClick="openAliasConfig"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.98"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.01"
-            app:srcCompat="@drawable/custom_settings_img" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/glLimitLoginBottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="418dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

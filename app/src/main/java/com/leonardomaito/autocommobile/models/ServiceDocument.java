@@ -2,30 +2,31 @@ package com.leonardomaito.autocommobile.models;
 
 import com.google.firebase.firestore.PropertyName;
 
-import java.util.List;
-
 public class ServiceDocument {
 
-    public List<ServiceOrder> serviceOrder;
+    public ServiceOrder serviceOrder;
 
     public ServiceDocument() {
     }
 
-    public ServiceDocument(List<ServiceOrder> serviceOrder) {
+    public ServiceDocument(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
 
     @PropertyName("serviceOrder")
-    public List<ServiceOrder> getServiceOrder() {
+    public  ServiceOrder getServiceOrder() {
         return serviceOrder;
     }
 
-    @PropertyName("serviceOrder")
-    public void setServiceOrder(List<ServiceOrder> serviceOrder) {
-        this.serviceOrder = serviceOrder;
+    @PropertyName("id")
+    public Integer getId() {
+        return serviceOrder.getId();
     }
 
-
+    @PropertyName("serviceOrder")
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
+    }
 
 }
 

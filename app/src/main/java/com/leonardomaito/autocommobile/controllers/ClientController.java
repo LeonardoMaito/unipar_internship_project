@@ -1,8 +1,5 @@
 package com.leonardomaito.autocommobile.controllers;
 
-
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,6 +15,7 @@ public class ClientController {
     private String clientCpf;
     private String clientAddress;
     private String clientTelephone;
+    CPFValidator cpfValidator = new CPFValidator();
 
      public Client returnNewClient(EditText etClientName,
                                    EditText etClientCpf,
@@ -39,87 +37,38 @@ public class ClientController {
 
      }
 
-     public void etClientNameWatcher(EditText etClientName, Button nextOs){
-
-         etClientName.addTextChangedListener(new TextWatcher() {
-             @Override
-             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+     public boolean verifyCpf(EditText etClientCpf){
+             try{
+                 cpfValidator.assertValid(etClientCpf.getText().toString());
+                 return true;
+             } catch (InvalidStateException e){
+                 return false;
              }
-
-             @Override
-             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!verifyClientName(etClientName, nextOs)){
-                    nextOs.setBackgroundColor(nextOs.getContext().getResources().getColor(R.color.negative_button));
-                    etClientName.setError("O nome precisa conter cinco caracteres no mínimo");
-
-                }
-                else{
-                    nextOs.setBackgroundColor(nextOs.getContext().getResources().getColor(R.color.autocom_blue));
-
-                }
-             }
-
-             @Override
-             public void afterTextChanged(Editable editable) {
-
-             }
-         });
-
      }
 
-    public void etClientCpfWatcher(EditText etClientCpf, Button nextOs){
+    public boolean checkAllClientFields(EditText etClientName, EditText etClientCpf, Button nextOs){
+        int yourDesiredLength = 3;
+        int cpfLength = 11;
 
-        etClientCpf.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (etClientName.getText().length() < yourDesiredLength) {
+            etClientName.setError("Mínimo de 3 Caracteres");
+            etClientName.requestFocus();
+            return false;
+        }
+        else if(etClientCpf.getText().length() < cpfLength || etClientCpf.getText().length() > cpfLength ){
+                etClientCpf.setError("CPF precisa conter 11 dígitos");
+                etClientCpf.requestFocus();
+                return false;
             }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!verifyClientName(etClientCpf, nextOs)){
-                    etClientCpf.setError("O CPF precisa ser preenchido");
-                    nextOs.setBackgroundColor(nextOs.getContext().getResources().getColor(R.color.negative_button));
-
-
+       else if(etClientCpf.getText().length() == cpfLength){
+                if(!verifyCpf(etClientCpf)){
+                    etClientCpf.setError("Insira um CPF válido");
+                    etClientCpf.requestFocus();
+                    return false;
                 }
-                else{
-                    nextOs.setBackgroundColor(nextOs.getContext().getResources().getColor(R.color.autocom_blue));
-
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
+        }
+        nextOs.setBackgroundColor(nextOs.getContext().getResources().getColor(R.color.autocom_blue));
+        nextOs.setEnabled(true);
+        return true;
     }
-
-    public boolean verifyClientCpf(EditText etClientCpf, Button nextOs){
-
-        CPFValidator cpfValidator = new CPFValidator();
-
-         try{
-             cpfValidator.assertValid(etClientCpf.getText().toString());
-             return true;
-         } catch (InvalidStateException e){
-             etClientCpfWatcher(etClientCpf, nextOs);
-             return false;
-         }
-    }
-
-     public boolean verifyClientName(EditText etClientName, Button nextOs){
-
-         int yourDesiredLength = 5;
-         if (etClientName.getText().length() < yourDesiredLength) {
-             etClientNameWatcher(etClientName, nextOs);
-             return false;
-         }
-         else{
-             return true;
-         }
-     }
-
-
 }
