@@ -59,9 +59,10 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:contentDescription="Menu"
+        android:onClick="logOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/custom_vertical_menu" />
+        app:srcCompat="@drawable/custom_logout_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

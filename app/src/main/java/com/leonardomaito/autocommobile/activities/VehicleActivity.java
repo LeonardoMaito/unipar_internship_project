@@ -42,7 +42,7 @@ public class VehicleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_os_second);
+        setContentView(R.layout.activity_os_vehicle);
 
         Bundle data = getIntent().getExtras();
         Client newClient = data.getParcelable("novoCliente");

@@ -1,11 +1,13 @@
 package com.leonardomaito.autocommobile.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +15,7 @@ import android.view.View;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +33,8 @@ public class OsRecyclerActivity extends AppCompatActivity {
 
     public static Activity self_intent;
     private int updateOption = 0;
+
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,5 +84,29 @@ public class OsRecyclerActivity extends AppCompatActivity {
         startActivity(newOsIntent);
         finish();
 
+    }
+
+    public void logOut(View view){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
+        alert.setTitle("Autocom Mobile");
+        alert.setMessage("Você tem certeza que deseja sair do aplicativo?");
+        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                FirebaseAuth.getInstance().signOut();
+                Intent newOsIntent = new Intent(OsRecyclerActivity.this, LoginActivity.class);
+                startActivity(newOsIntent);
+                finish();
+            }
+        });
+        alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog = alert.create();
+        alertDialog.show();
     }
 }

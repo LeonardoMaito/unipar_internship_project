@@ -7,12 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.leonardomaito.autocommobile.activities.MainActivity"
+    tools:context="com.leonardomaito.autocommobile.activities.LoginActivity"
     android:id="@+id/svMain">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".MainActivity">
 
@@ -75,17 +75,16 @@
             android:id="@+id/btLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:background="@drawable/custom_button"
             android:minWidth="200dp"
             android:onClick="login"
             android:text="Acessar"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
             app:layout_constraintHorizontal_bias="0.536"
             app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordInput"
-            app:layout_constraintVertical_bias="0.213" />
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordInput" />
 
         <TextView
             android:id="@+id/tvVersao"
@@ -101,7 +100,7 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
             app:layout_constraintTop_toBottomOf="@+id/ivLogo"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tvLogin"
@@ -129,8 +128,25 @@
             app:layout_constraintHorizontal_bias="0.527"
             app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
             app:layout_constraintTop_toBottomOf="@+id/btLogin"
-            app:layout_constraintVertical_bias="0.365"
+            app:layout_constraintVertical_bias="0.488"
             app:srcCompat="@drawable/custom_login_logo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Registrar-se"
+            android:textAlignment="center"
+            android:textColor="@color/autocom_blue"
+            android:textSize="25dp"
+            android:onClick="register"
+            app:layout_constraintBottom_toTopOf="@+id/ivLogo"
+            app:layout_constraintEnd_toStartOf="@+id/glLimitLoginRight"
+            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintStart_toStartOf="@+id/glLimitLoginLeft"
+            app:layout_constraintTop_toBottomOf="@+id/btLogin"
+            app:layout_constraintVertical_bias="0.121" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
