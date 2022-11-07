@@ -39,7 +39,7 @@ public class ClientActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_os);
+        setContentView(R.layout.activity_os_client);
 
         nextOsStep = findViewById(R.id.btNextOs);
         nextOsStep.setBackgroundColor(getResources().getColor(R.color.negative_button));

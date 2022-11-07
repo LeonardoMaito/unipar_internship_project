@@ -3,7 +3,6 @@ package com.leonardomaito.autocommobile.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +17,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.leonardomaito.autocommobile.controllers.ServiceOrderController;
 import com.leonardomaito.autocommobile.controllers.UpdateOSController;
-import com.leonardomaito.autocommobile.controllers.VehicleController;
 import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
@@ -52,7 +50,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_new_os_third);
+        setContentView(R.layout.activity_os_service);
 
         Bundle data = getIntent().getExtras();
         Client newClient = data.getParcelable("novoCliente");
