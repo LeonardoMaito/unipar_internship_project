@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,16 +34,7 @@ public class ServiceOrderController {
     private Map<String, Object> data = new HashMap<>();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference docRef =
-            db.collection("cliente")
-                    .document("clienteTeste")
-                    .collection("ServiceOrder");
-
-    private DocumentReference idRef =
-            db.collection("cliente")
-                    .document("clienteTeste")
-                    .collection("ServiceOrder")
-                    .document("reservedId");
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public void returnNewServiceOrder(EditText etService, EditText etObservation, EditText etPaymentForm
     , Client newClient, Vehicle newVehicle, EditText etDate, EditText etValue){
@@ -61,6 +54,17 @@ public class ServiceOrderController {
     }
 
     public void sendDataToFirestore(ServiceOrder serviceOrder){
+
+        CollectionReference docRef =
+                db.collection("userData")
+                        .document(user.getUid())
+                        .collection("ServiceOrder");
+
+        DocumentReference idRef =
+                db.collection("userData")
+                        .document(user.getUid())
+                        .collection("reservedID")
+                        .document("reservedProductId");
 
         idRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

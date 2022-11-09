@@ -16,6 +16,7 @@ import android.view.View;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,8 +29,7 @@ import autocommobile.R;
 public class OsRecyclerActivity extends AppCompatActivity {
     private FirestoreAdapter listAdapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference osRef = db.collection("cliente").document("clienteTeste")
-            .collection("ServiceOrder");
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public static Activity self_intent;
     private int updateOption = 0;
@@ -40,6 +40,9 @@ public class OsRecyclerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_os);
+
+        CollectionReference osRef = db.collection("userData").document(user.getUid())
+                .collection("ServiceOrder");
 
         self_intent = this;
 
