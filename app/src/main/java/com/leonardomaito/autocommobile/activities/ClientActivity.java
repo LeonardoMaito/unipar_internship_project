@@ -13,6 +13,8 @@ import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +32,7 @@ public class ClientActivity extends AppCompatActivity {
     private EditText etClientAddress;
     private EditText etClientTelephone;
 
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private ClientController clientController = new ClientController();
     private int updateOption = 0;
     private String documentId;
@@ -83,8 +86,8 @@ public class ClientActivity extends AppCompatActivity {
     private void setViewForUpdate(String documentId, Integer updateOption){
 
         DocumentReference idRef =
-                db.collection("cliente")
-                        .document("clienteTeste")
+                db.collection("userData")
+                        .document(user.getUid())
                         .collection("ServiceOrder")
                         .document(documentId);
 

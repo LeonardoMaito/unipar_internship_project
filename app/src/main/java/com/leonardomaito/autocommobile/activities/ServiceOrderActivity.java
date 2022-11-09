@@ -12,6 +12,8 @@ import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,6 +44,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
     private String documentId;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private ServiceOrderController serviceOrderController = new ServiceOrderController();;
     private UpdateOSController updateOSController = new UpdateOSController();
@@ -102,8 +105,8 @@ public class ServiceOrderActivity extends AppCompatActivity {
 
     private void setViewForUpdate(String documentId, Client newClient, Vehicle newVehicle) {
         DocumentReference idRef =
-                db.collection("cliente")
-                        .document("clienteTeste")
+                db.collection("userData")
+                        .document(user.getUid())
                         .collection("ServiceOrder")
                         .document(documentId);
 

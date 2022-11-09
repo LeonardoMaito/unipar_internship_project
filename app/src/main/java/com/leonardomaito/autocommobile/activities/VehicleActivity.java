@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,6 +40,7 @@ public class VehicleActivity extends AppCompatActivity {
     private String documentId;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +87,8 @@ public class VehicleActivity extends AppCompatActivity {
     private void setViewForUpdate(String documentId, int updateOption, Client newClient) {
 
         DocumentReference idRef =
-                db.collection("cliente")
-                        .document("clienteTeste")
+                db.collection("userData")
+                        .document(user.getUid())
                         .collection("ServiceOrder")
                         .document(documentId);
 

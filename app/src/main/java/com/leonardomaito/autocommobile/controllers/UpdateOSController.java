@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,13 +28,15 @@ public class UpdateOSController {
     private double osValue;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
     public void returnNewServiceOrder(EditText etService, EditText etObservation, EditText etPaymentForm
             , Client newClient, Vehicle newVehicle, EditText etDate, EditText etValue, String docId){
 
         DocumentReference idRef =
-                db.collection("cliente")
-                        .document("clienteTeste")
+                db.collection("userData")
+                        .document(user.getUid())
                         .collection("ServiceOrder")
                         .document(docId);
 
@@ -70,8 +74,8 @@ public class UpdateOSController {
     public void sendDataToFirestore(ServiceOrder serviceOrder, String docId, int id){
 
         DocumentReference idRef =
-                db.collection("cliente")
-                        .document("clienteTeste")
+                db.collection("userData")
+                        .document(user.getUid())
                         .collection("ServiceOrder")
                         .document(docId);
 

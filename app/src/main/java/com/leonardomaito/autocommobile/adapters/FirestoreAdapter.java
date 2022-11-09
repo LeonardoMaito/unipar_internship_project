@@ -16,6 +16,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.leonardomaito.autocommobile.activities.ClientActivity;
@@ -26,6 +28,8 @@ import com.leonardomaito.autocommobile.models.ServiceDocument;
 import autocommobile.R;
 
 public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, FirestoreAdapter.ViewHolder> {
+
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference docRef =
@@ -105,6 +109,11 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
     }
 
     public void deleteOs(Integer position, ViewHolder holder) {
+
+       CollectionReference docRef =
+                db.collection("userData")
+                        .document(user.getUid())
+                        .collection("ServiceOrder");
 
         String documentId = getSnapshots().getSnapshot(position).getId();
         AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
