@@ -132,7 +132,6 @@ public class ServiceOrder implements Parcelable {
         parcel.writeDouble(totalValue);
         parcel.writeInt(id);
     }
-
     public static class ServiceOrderBuilder {
 
         private Vehicle vehicle;

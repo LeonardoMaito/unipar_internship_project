@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.leonardomaito.autocommobile.controllers.ClientController;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
+import com.santalu.maskara.widget.MaskEditText;
 
 import autocommobile.R;
 
@@ -28,7 +29,7 @@ public class ClientActivity extends AppCompatActivity {
 
     public Button nextOsStep;
     public EditText etClientName;
-    public EditText etClientCpf;
+    public MaskEditText etClientCpf;
     private EditText etClientAddress;
     private EditText etClientTelephone;
 

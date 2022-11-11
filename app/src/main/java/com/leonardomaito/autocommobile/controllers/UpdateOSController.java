@@ -17,6 +17,7 @@ import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
+import com.santalu.maskara.widget.MaskEditText;
 
 
 public class UpdateOSController {
@@ -32,7 +33,7 @@ public class UpdateOSController {
 
 
     public void returnNewServiceOrder(EditText etService, EditText etObservation, EditText etPaymentForm
-            , Client newClient, Vehicle newVehicle, EditText etDate, EditText etValue, String docId){
+            , Client newClient, Vehicle newVehicle, MaskEditText etDate, EditText etValue, String docId){
 
         DocumentReference idRef =
                 db.collection("userData")

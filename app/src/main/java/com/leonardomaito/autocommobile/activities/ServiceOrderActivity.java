@@ -1,9 +1,11 @@
 package com.leonardomaito.autocommobile.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,22 +25,27 @@ import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
+import com.santalu.maskara.widget.MaskEditText;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
 import autocommobile.R;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ServiceOrderActivity extends AppCompatActivity {
 
     private Button returnMenuOs;
     private EditText etService;
     private EditText etObservation;
     private EditText etPaymentForm;
-    private EditText etDate;
+    private MaskEditText etDate;
     private EditText etValue;
-    private Date currentTime = Calendar.getInstance().getTime();
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private LocalDate currentTime = LocalDate.now();
 
     private int updateOption = 0;
     private String documentId;
@@ -89,7 +96,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (serviceOrderController.checkAllServiceFields(etValue)) {
+                if (serviceOrderController.checkAllServiceFields(etValue, etDate)) {
 
                     serviceOrderController.returnNewServiceOrder(etService, etObservation, etPaymentForm, newClient,
                             newVehicle, etDate, etValue);
@@ -131,7 +138,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (serviceOrderController.checkAllServiceFields(etValue)) {
+                if (serviceOrderController.checkAllServiceFields(etValue, etDate)) {
 
                     updateOSController.returnNewServiceOrder(etService, etObservation, etPaymentForm, newClient,
                             newVehicle, etDate, etValue, documentId);

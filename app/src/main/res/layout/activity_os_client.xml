@@ -121,7 +121,7 @@
             app:layout_constraintStart_toStartOf="@id/glLeftMargin"
             app:layout_constraintTop_toBottomOf="@+id/etCPFInput" />
 
-        <EditText
+        <com.santalu.maskara.widget.MaskEditText
             android:id="@+id/etTelephoneInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -130,10 +130,14 @@
             android:ems="17"
             android:importantForAutofill="no"
             android:inputType="phone"
+            app:mask="(__) _________"
+            app:maskStyle="normal"
+            app:maskCharacter="_"
             android:minHeight="48dp"
             android:textColor="@color/autocom_blue"
             android:textStyle="bold"
             android:paddingLeft="8dp"
+
             app:layout_constraintEnd_toEndOf="@id/glRightMargin"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/glLeftMargin"
@@ -153,18 +157,21 @@
             app:layout_constraintStart_toStartOf="@id/glLeftMargin"
             app:layout_constraintTop_toBottomOf="@+id/etAddressInput" />
 
-        <EditText
+        <com.santalu.maskara.widget.MaskEditText
             android:id="@+id/etCPFInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/custom_border"
             android:importantForAutofill="no"
-            android:inputType="text"
             android:minHeight="48dp"
             android:textColor="@color/autocom_blue"
             android:textStyle="bold"
             android:paddingLeft="8dp"
+            android:inputType="number"
+            app:mask="___.___.___-__"
+            app:maskStyle="completable"
+            app:maskCharacter="_"
             app:layout_constraintEnd_toEndOf="@id/glRightMargin"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/glLeftMargin"

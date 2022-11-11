@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.leonardomaito.autocommobile.controllers.LoginController;
 
 
@@ -31,6 +32,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            Intent loginIntent = new Intent(LoginActivity.this, MenuActivity.class);
+            startActivity(loginIntent);
+            finish();
+        } else
+
+        mAuth = FirebaseAuth.getInstance();
 
         etEmailInput = findViewById(R.id.etEmailInput);
         etPasswordInput = findViewById(R.id.etPasswordInput);

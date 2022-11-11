@@ -62,7 +62,7 @@
             app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
             app:layout_constraintTop_toTopOf="@+id/glViewBottom" />
 
-        <EditText
+        <com.santalu.maskara.widget.MaskEditText
             android:id="@+id/etDateInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,6 +71,9 @@
             android:background="@drawable/custom_border"
             android:minHeight="48dp"
             android:paddingLeft="8dp"
+            app:mask="__/__/____"
+            app:maskStyle="completable"
+            app:maskCharacter="_"
             app:layout_constraintBottom_toTopOf="@+id/tvExecuteService"
             app:layout_constraintEnd_toStartOf="@+id/glCenter"
             app:layout_constraintHorizontal_bias="0.066"

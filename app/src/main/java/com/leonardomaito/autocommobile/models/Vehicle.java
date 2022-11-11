@@ -8,9 +8,10 @@ public class Vehicle implements Parcelable {
     private String brand;
     private String model;
     private String color;
+    private String chassi;
     private int year;
     private double km;
-    private double chassi;
+
 
     public Vehicle() {
     }
@@ -28,7 +29,7 @@ public class Vehicle implements Parcelable {
     protected Vehicle(Parcel in) {
         brand = in.readString();
         model = in.readString();
-        chassi = in.readDouble();
+        chassi = in.readString();
         year = in.readInt();
         color = in.readString();
         km = in.readDouble();
@@ -55,11 +56,11 @@ public class Vehicle implements Parcelable {
         this.brand = brand;
     }
 
-    public double getChassi() {
+    public String getChassi() {
         return chassi;
     }
 
-    public void setChassi(double chassi) {
+    public void setChassi(String chassi) {
         this.chassi = chassi;
     }
 
@@ -104,7 +105,7 @@ public class Vehicle implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(brand);
         parcel.writeString(model);
-        parcel.writeDouble(chassi);
+        parcel.writeString(chassi);
         parcel.writeInt(year);
         parcel.writeString(color);
         parcel.writeDouble(km);
@@ -126,7 +127,7 @@ public class Vehicle implements Parcelable {
 
         private final String brand;
         private final String model;
-        private double chassi;
+        private String chassi;
         private int year;
         private String color;
         private double km;
@@ -136,7 +137,7 @@ public class Vehicle implements Parcelable {
             this.model = model;
         }
 
-        public Vehicle.VehicleBuilder chassi(double chassi){
+        public Vehicle.VehicleBuilder chassi(String chassi){
             this.chassi = chassi;
             return this;
         }

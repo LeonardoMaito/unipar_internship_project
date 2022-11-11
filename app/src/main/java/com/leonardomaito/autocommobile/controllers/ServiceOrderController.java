@@ -1,10 +1,12 @@
 package com.leonardomaito.autocommobile.controllers;
 
 
+import android.os.Build;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 
@@ -19,7 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
+import com.santalu.maskara.widget.MaskEditText;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +42,7 @@ public class ServiceOrderController {
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public void returnNewServiceOrder(EditText etService, EditText etObservation, EditText etPaymentForm
-    , Client newClient, Vehicle newVehicle, EditText etDate, EditText etValue){
+    , Client newClient, Vehicle newVehicle, MaskEditText etDate, EditText etValue){
 
         osService = etService.getText().toString();
         osObservation = etObservation.getText().toString();
@@ -86,12 +91,29 @@ public class ServiceOrderController {
         });
     }
 
-    public boolean checkAllServiceFields(EditText osValue){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean checkAllServiceFields(EditText osValue, MaskEditText date){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dates = date.getText().toString();
+
         if(Double.parseDouble(osValue.getText().toString()) <= 0 ){
             osValue.setError("O valor precisa ser acima de 0");
             osValue.requestFocus();
             return false;
         }
+
+        try
+        {
+            LocalDate currentTime = LocalDate.parse(dates,formatter);
+
+        }
+        catch (Exception error)
+        {
+            date.setError("Data inválida");
+            return false;
+        }
+
         return true;
     }
 }

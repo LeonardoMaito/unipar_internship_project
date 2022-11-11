@@ -21,6 +21,7 @@ import com.leonardomaito.autocommobile.controllers.VehicleController;
 import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
+import com.santalu.maskara.widget.MaskEditText;
 
 import autocommobile.R;
 
@@ -29,7 +30,7 @@ public class VehicleActivity extends AppCompatActivity {
     private Button startOsSecond;
     private EditText etBrand;
     private EditText etModel;
-    private EditText etChassi;
+    private MaskEditText etChassi;
     private EditText etYear;
     private EditText etColor;
     private EditText etKm;
