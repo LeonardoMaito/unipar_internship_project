@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:showIn="@layout/activity_os"
+    app:cardBackgroundColor="@color/white"
     android:background="@drawable/custom_card_view">
 
     <androidx.constraintlayout.widget.ConstraintLayout

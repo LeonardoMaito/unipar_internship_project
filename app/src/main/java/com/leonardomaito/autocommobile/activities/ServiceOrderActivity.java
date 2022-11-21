@@ -86,7 +86,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
             etDate.setText(formatter.format(currentTime));
             setView(newClient, newVehicle);
         } else {
-            setViewForUpdate(documentId, newClient, newVehicle);
+            setViewForUpdate(documentId, newClient, newVehicle, updateOption);
         }
     }
 
@@ -110,7 +110,8 @@ public class ServiceOrderActivity extends AppCompatActivity {
 
     }
 
-    private void setViewForUpdate(String documentId, Client newClient, Vehicle newVehicle) {
+    private void setViewForUpdate(String documentId, Client newClient, Vehicle newVehicle, Integer updateOption) {
+        Log.e("UpdateOption"," " + updateOption);
         DocumentReference idRef =
                 db.collection("userData")
                         .document(user.getUid())
@@ -137,17 +138,24 @@ public class ServiceOrderActivity extends AppCompatActivity {
         returnMenuOs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(updateOption ==1){
+                    if (serviceOrderController.checkAllServiceFields(etValue, etDate)) {
 
-                if (serviceOrderController.checkAllServiceFields(etValue, etDate)) {
+                        updateOSController.returnNewServiceOrder(etService, etObservation, etPaymentForm, newClient,
+                                newVehicle, etDate, etValue, documentId);
 
-                    updateOSController.returnNewServiceOrder(etService, etObservation, etPaymentForm, newClient,
-                            newVehicle, etDate, etValue, documentId);
+                        Intent intent = new Intent(getApplicationContext(), OsRecyclerActivity.class);
+                        startActivity(intent);
+                        finish();
 
+                }
+                }
+                else{
                     Intent intent = new Intent(getApplicationContext(), OsRecyclerActivity.class);
                     startActivity(intent);
                     finish();
                 }
             }
         });
-    }
+        }
 }

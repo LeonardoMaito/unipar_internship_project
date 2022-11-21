@@ -1,6 +1,5 @@
 package com.leonardomaito.autocommobile.controllers;
 
-import android.util.Log;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -54,15 +53,13 @@ public class UpdateOSController {
                         osPaymentForm = etPaymentForm.getText().toString();
                         osValue = Double.parseDouble(etValue.getText().toString());
 
-                        Log.d("Result", "ID" + id);
-
                         ServiceOrder newServiceOrder = new ServiceOrder.ServiceOrderBuilder(newClient,
                                 newVehicle, osService, osPaymentForm, osValue, String.valueOf(etDate.getText()))
                                 .observation(osObservation)
                                 .id(id)
                                 .build();
 
-                        sendDataToFirestore(newServiceOrder, docId, id);
+                        sendDataToFirestore(newServiceOrder, docId);
                     }
                 }
             }
@@ -72,7 +69,7 @@ public class UpdateOSController {
     }
 
 
-    public void sendDataToFirestore(ServiceOrder serviceOrder, String docId, int id){
+    public void sendDataToFirestore(ServiceOrder serviceOrder, String docId){
 
         DocumentReference idRef =
                 db.collection("userData")

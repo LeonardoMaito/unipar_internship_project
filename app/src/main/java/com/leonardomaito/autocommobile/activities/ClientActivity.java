@@ -59,8 +59,7 @@ public class ClientActivity extends AppCompatActivity {
 
         if(updateOption == 0){
             setView();
-        }
-        else{
+        }else{
             setViewForUpdate(documentId, updateOption);
         }
     }
