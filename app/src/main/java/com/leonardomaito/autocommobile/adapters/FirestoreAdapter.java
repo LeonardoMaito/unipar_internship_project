@@ -32,10 +32,6 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference docRef =
-            db.collection("cliente")
-                    .document("clienteTeste")
-                    .collection("ServiceOrder");
 
     private AlertDialog alertDialog;
 
@@ -50,7 +46,7 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
         holder.osIdItem.setText(String.valueOf(model.serviceOrder.getId()));
         holder.osClientItem.setText(model.serviceOrder.getClient().getName());
         holder.osDateItem.setText(model.serviceOrder.getDate());
-        holder.osValueItem.setText(String.valueOf("R$: " + model.serviceOrder.getTotalValue()));
+        holder.osValueItem.setText("R$: " + model.serviceOrder.getTotalValue());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,13 +94,48 @@ public class FirestoreAdapter extends FirestoreRecyclerAdapter<ServiceDocument, 
 
     public void updateOs(Integer position, ViewHolder holder){
 
-        updateOption = 1;
-        String documentId = getSnapshots().getSnapshot(position).getId();
-        Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
-        updateClientActivity.putExtra("documentId", documentId);
-        updateClientActivity.putExtra("updateOption", updateOption);
-        holder.itemView.getContext().startActivity(updateClientActivity);
-        OsRecyclerActivity.self_intent.finish();
+        AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
+        alert.setCancelable(false);
+        alert.setTitle("Alterar ou Visualizar O.S");
+        alert.setMessage("Você deseja alterar ou editar a O.S?");
+        alert.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                updateOption = 1;
+                String documentId = getSnapshots().getSnapshot(position).getId();
+                Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
+                updateClientActivity.putExtra("documentId", documentId);
+                updateClientActivity.putExtra("updateOption", updateOption);
+                holder.itemView.getContext().startActivity(updateClientActivity);
+                OsRecyclerActivity.self_intent.finish();
+
+            }
+        });
+        alert.setNeutralButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                alertDialog.dismiss();
+
+            }
+        });
+        alert.setNegativeButton("Visualizar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                updateOption = 2;
+                String documentId = getSnapshots().getSnapshot(position).getId();
+                Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
+                updateClientActivity.putExtra("documentId", documentId);
+                updateClientActivity.putExtra("updateOption", updateOption);
+                holder.itemView.getContext().startActivity(updateClientActivity);
+                OsRecyclerActivity.self_intent.finish();
+
+            }
+        });
+        alertDialog = alert.create();
+        alertDialog.show();
 
     }
 
