@@ -58,6 +58,7 @@
         <entry key="app/src/main/res/layout/activity_os_vehicle.xml" value="0.15818725951261223" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_update_os.xml" value="0.15818725951261223" />
+        <entry key="app/src/main/res/layout/activity_view_os.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_new_os.xml" value="0.13134057971014493" />
         <entry key="app/src/main/res/layout/custom_header.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dialog_fragment_alias.xml" value="0.25" />

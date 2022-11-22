@@ -64,10 +64,7 @@ public class UpdateOSController {
                 }
             }
         });
-
-
     }
-
 
     public void sendDataToFirestore(ServiceOrder serviceOrder, String docId){
 

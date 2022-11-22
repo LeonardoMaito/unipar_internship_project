@@ -2,7 +2,6 @@ package com.leonardomaito.autocommobile.controllers;
 
 
 import android.os.Build;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -34,7 +33,6 @@ public class ServiceOrderController {
     private String osObservation;
     private String osPaymentForm;
     private double osValue;
-    private double value;
     private long idValue;
     private Map<String, Object> data = new HashMap<>();
 
@@ -69,7 +67,7 @@ public class ServiceOrderController {
                 db.collection("userData")
                         .document(user.getUid())
                         .collection("reservedID")
-                        .document("reservedProductId");
+                        .document("reservedServiceId");
 
         idRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

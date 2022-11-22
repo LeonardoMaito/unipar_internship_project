@@ -10,18 +10,14 @@
         android:background="@color/white"
         tools:context="com.leonardomaito.autocommobile.activities.OsRecyclerActivity">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/layout_header_search"
-        app:layout_constraintBottom_toTopOf="@+id/glRecyclerLimit"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <include layout="@layout/layout_header" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/glRecyclerLimit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="124dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glRecyclerLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="78dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewOs"

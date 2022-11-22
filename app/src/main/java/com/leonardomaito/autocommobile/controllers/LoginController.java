@@ -3,16 +3,13 @@ package com.leonardomaito.autocommobile.controllers;
 import android.util.Patterns;
 import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginController {
 
-    private FirebaseAuth auth;
     private String email,password;
 
-    private boolean isAllFieldsChecked = false;
-
     public boolean checkAllFields(EditText edEmailLogin, EditText edPasswordLogin) {
+
         email = edEmailLogin.getText().toString();
         password = edPasswordLogin.getText().toString();
 
@@ -33,6 +30,7 @@ public class LoginController {
             edPasswordLogin.setError("A senha deve conter ao menos 6 caracteres");
             return false;
         }
+
         return true;
     }
 

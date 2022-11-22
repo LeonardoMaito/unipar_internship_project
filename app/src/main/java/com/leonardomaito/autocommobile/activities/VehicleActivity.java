@@ -1,6 +1,7 @@
 package com.leonardomaito.autocommobile.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -71,6 +73,7 @@ public class VehicleActivity extends AppCompatActivity {
 
     private void setView(Client newClient) {
         startOsSecond.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
 
@@ -113,6 +116,7 @@ public class VehicleActivity extends AppCompatActivity {
         });
 
         startOsSecond.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
 

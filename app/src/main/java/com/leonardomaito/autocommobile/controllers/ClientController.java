@@ -1,6 +1,5 @@
 package com.leonardomaito.autocommobile.controllers;
 
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 

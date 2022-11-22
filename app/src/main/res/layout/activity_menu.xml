@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:orientation="horizontal"
-                app:constraint_referenced_ids="btMenuOs,btPlaceholder,btPlaceholder2,btPlaceholder3,btPlaceholder4,btPlaceholder5"
+                app:constraint_referenced_ids="btMenuOs,btOpenClient,btPlaceholder2,btPlaceholder3,btPlaceholder4,btPlaceholder5"
                 app:flow_horizontalGap="20dp"
                 app:flow_maxElementsWrap="2"
                 app:flow_verticalGap="50dp"
@@ -91,18 +91,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button"
-                android:text="Ordem de Serviço"
+                android:text="Ordens de Serviço"
                 android:onClick="openOsActivity"
                 android:textColor="@color/white"
                 tools:layout_editor_absoluteX="59dp"
                 tools:layout_editor_absoluteY="238dp" />
 
             <android.widget.Button
-                android:id="@+id/btPlaceholder"
+                android:id="@+id/btOpenClient"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button"
-                android:text="Em breve!"
+                android:text="Clientes"
+                android:onClick="openClientActivity"
                 android:textColor="@color/white"
                 tools:layout_editor_absoluteX="59dp"
                 tools:layout_editor_absoluteY="238dp" />
