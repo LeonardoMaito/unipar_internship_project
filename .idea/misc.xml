@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/drawable/custom_business_icon.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/custom_button.xml" value="0.1995" />
         <entry key="app/src/main/res/drawable/custom_card_view.xml" value="0.141" />
+        <entry key="app/src/main/res/drawable/custom_client_icon.xml" value="0.2005" />
         <entry key="app/src/main/res/drawable/custom_config_img.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/custom_edittext.xml" value="0.1985" />
         <entry key="app/src/main/res/drawable/custom_edittext_bottom.xml" value="0.2005" />
@@ -45,6 +46,7 @@
         <entry key="app/src/main/res/drawable/spinner_bg.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.1995" />
         <entry key="app/src/main/res/layout/.xml" value="0.19270833333333334" />
+        <entry key="app/src/main/res/layout/activity_client_menu.xml" value="0.1466438648995297" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2074074074074074" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.25" />
@@ -53,11 +55,12 @@
         <entry key="app/src/main/res/layout/activity_new_os_second.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_new_os_third.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_os.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_os_client.xml" value="0.15818725951261223" />
-        <entry key="app/src/main/res/layout/activity_os_service.xml" value="0.15818725951261223" />
-        <entry key="app/src/main/res/layout/activity_os_vehicle.xml" value="0.15818725951261223" />
+        <entry key="app/src/main/res/layout/activity_os_client.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_os_service.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_os_vehicle.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_update_os.xml" value="0.15818725951261223" />
+        <entry key="app/src/main/res/layout/activity_view_client.xml" value="0.1573321932449765" />
         <entry key="app/src/main/res/layout/activity_view_os.xml" value="0.33" />
         <entry key="app/src/main/res/layout/content_new_os.xml" value="0.13134057971014493" />
         <entry key="app/src/main/res/layout/custom_header.xml" value="0.5" />
@@ -68,10 +71,12 @@
         <entry key="app/src/main/res/layout/fragment_new_os_2.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_new_os_3.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_os.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_ac_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_client_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_dialog_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_header.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_header_search.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/layout_os_item.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/layout_os_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/layout_os_menu.xml" value="0.19270833333333334" />
         <entry key="app/src/main/res/layout/layout_testing.xml" value="0.33" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2005" />
@@ -79,7 +84,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -1,14 +1,20 @@
 package com.leonardomaito.autocommobile.controllers;
 
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,6 +23,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.leonardomaito.autocommobile.activities.ClientActivity;
+import com.leonardomaito.autocommobile.activities.OsRecyclerActivity;
+import com.leonardomaito.autocommobile.adapters.ServiceOrderAdapter;
 import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
@@ -36,8 +45,14 @@ public class ServiceOrderController {
     private long idValue;
     private Map<String, Object> data = new HashMap<>();
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference docRef =
+                     db.collection("userData")
+                    .document(user.getUid())
+                    .collection("ServiceOrder");
+
+    private AlertDialog alertDialog;
 
     public void returnNewServiceOrder(EditText etService, EditText etObservation, EditText etPaymentForm
     , Client newClient, Vehicle newVehicle, MaskEditText etDate, EditText etValue){
@@ -54,6 +69,32 @@ public class ServiceOrderController {
                 .build();
 
         sendDataToFirestore(newServiceOrder);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean checkAllServiceFields(EditText osValue, MaskEditText date){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dates = date.getText().toString();
+
+        if(Double.parseDouble(osValue.getText().toString()) <= 0 ){
+            osValue.setError("O valor precisa ser acima de 0");
+            osValue.requestFocus();
+            return false;
+        }
+
+        try
+        {
+            LocalDate currentTime = LocalDate.parse(dates,formatter);
+
+        }
+        catch (Exception error)
+        {
+            date.setError("Data inválida");
+            return false;
+        }
+
+        return true;
     }
 
     public void sendDataToFirestore(ServiceOrder serviceOrder){
@@ -89,29 +130,81 @@ public class ServiceOrderController {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean checkAllServiceFields(EditText osValue, MaskEditText date){
+    public void deleteDataFromFirestore(ServiceOrderAdapter.ViewHolder holder, String documentId){
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String dates = date.getText().toString();
+        AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
+        alert.setCancelable(false);
+        alert.setTitle("Excluir O.S");
+        alert.setMessage("Você tem certeza que quer excluir essa O.S?");
+        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                docRef.document(documentId)
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(holder.itemView.getContext(), "Excluido com sucesso!", Toast.LENGTH_SHORT).show();
 
-        if(Double.parseDouble(osValue.getText().toString()) <= 0 ){
-            osValue.setError("O valor precisa ser acima de 0");
-            osValue.requestFocus();
-            return false;
-        }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(holder.itemView.getContext(), "Erro ao tentar excluir!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+        alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog = alert.create();
+        alertDialog.show();
 
-        try
-        {
-            LocalDate currentTime = LocalDate.parse(dates,formatter);
+    }
 
-        }
-        catch (Exception error)
-        {
-            date.setError("Data inválida");
-            return false;
-        }
+    public void updateDataFromFirestore(Integer position, ServiceOrderAdapter.ViewHolder holder, String documentId){
 
-        return true;
+        AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
+        alert.setCancelable(false);
+        alert.setTitle("Alterar ou Visualizar O.S");
+        alert.setMessage("Você deseja alterar ou editar a O.S?");
+        alert.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
+                updateClientActivity.putExtra("documentId", documentId);
+                holder.itemView.getContext().startActivity(updateClientActivity);
+                OsRecyclerActivity.self_intent.finish();
+
+            }
+        });
+        alert.setNeutralButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                alertDialog.dismiss();
+
+            }
+        });
+        alert.setNegativeButton("Visualizar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
+                updateClientActivity.putExtra("documentId", documentId);
+                holder.itemView.getContext().startActivity(updateClientActivity);
+                OsRecyclerActivity.self_intent.finish();
+
+            }
+        });
+        alertDialog = alert.create();
+        alertDialog.show();
+
     }
 }

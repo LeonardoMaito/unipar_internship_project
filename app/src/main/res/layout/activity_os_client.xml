@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Ordem de Serviço"
+            android:text="Cliente"
             android:textColor="@color/autocom_blue"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/viewHorizontalBar"
@@ -178,7 +178,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvCPF" />
 
         <android.widget.Button
-            android:id="@+id/btNextOs"
+            android:id="@+id/btClient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -187,7 +187,7 @@
             android:minWidth="200dp"
             android:minHeight="50dp"
             android:onClick="nextOsStep"
-            android:text="Avançar"
+            android:text="Concluído"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/glRightMargin"

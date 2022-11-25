@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -21,13 +22,14 @@ import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.leonardomaito.autocommobile.adapters.FirestoreAdapter;
+import com.leonardomaito.autocommobile.adapters.ServiceOrderAdapter;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
 
 import autocommobile.R;
 
 public class OsRecyclerActivity extends AppCompatActivity {
-    private FirestoreAdapter listAdapter;
+
+    private ServiceOrderAdapter listAdapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -36,10 +38,15 @@ public class OsRecyclerActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
 
+    private TextView tvUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_os);
+
+        tvUser = findViewById(R.id.tvHeaderLoggedUser);
+        tvUser.setText(user.getDisplayName());
 
         CollectionReference osRef = db.collection("userData").document(user.getUid())
                 .collection("ServiceOrder");
@@ -55,7 +62,7 @@ public class OsRecyclerActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        Query query = osRef.orderBy("serviceOrder",
+        Query query = osRef.orderBy("serviceOrder.id",
                 Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<ServiceDocument> options =
@@ -63,7 +70,7 @@ public class OsRecyclerActivity extends AppCompatActivity {
                         .setQuery(query, ServiceDocument.class)
                         .build();
 
-        listAdapter = new FirestoreAdapter(options);
+        listAdapter = new ServiceOrderAdapter(options);
         recyclerView.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
 
@@ -82,8 +89,7 @@ public class OsRecyclerActivity extends AppCompatActivity {
     }
 
     public void createNewOs(View view) {
-        Intent newOsIntent = new Intent(this, ClientActivity.class);
-        newOsIntent.putExtra("updateOption",updateOption);
+        Intent newOsIntent = new Intent(this, VehicleActivity.class);
         startActivity(newOsIntent);
         finish();
 

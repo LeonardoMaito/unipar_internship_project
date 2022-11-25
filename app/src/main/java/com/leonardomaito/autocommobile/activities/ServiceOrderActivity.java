@@ -47,7 +47,6 @@ public class ServiceOrderActivity extends AppCompatActivity {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private LocalDate currentTime = LocalDate.now();
 
-    private int updateOption = 0;
     private String documentId;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -65,7 +64,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
         Bundle data = getIntent().getExtras();
         Client newClient = data.getParcelable("novoCliente");
         Vehicle newVehicle = data.getParcelable("novoCarro");
-        updateOption = data.getInt("updateOption");
+
         documentId = data.getString("documentId");
 
         returnMenuOs = findViewById(R.id.btReturnMenuOs);
@@ -76,19 +75,15 @@ public class ServiceOrderActivity extends AppCompatActivity {
         etPaymentForm = findViewById(R.id.etPaymentFormInput);
         etDate = findViewById(R.id.etDateInput);
         etValue = findViewById(R.id.etValue);
-        Log.e("OPTION", "updateOption = " + updateOption);
 
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        etValue.setText("0");
+        etDate.setText(formatter.format(currentTime));
+        setView(newClient, newVehicle);
 
-        if (updateOption == 0) {
-            Date currentTime = Calendar.getInstance().getTime();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            etValue.setText("0");
-            etDate.setText(formatter.format(currentTime));
-            setView(newClient, newVehicle);
-        } else {
-            setViewForUpdate(documentId, newClient, newVehicle, updateOption);
         }
-    }
+
 
     private void setView(Client newClient, Vehicle newVehicle) {
 
@@ -103,6 +98,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), OsRecyclerActivity.class);
                     startActivity(intent);
+                    VehicleActivity.self_intent.finish();
                     finish();
                 }
             }
@@ -110,7 +106,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
 
     }
 
-    private void setViewForUpdate(String documentId, Client newClient, Vehicle newVehicle, Integer updateOption) {
+   /* private void setViewForUpdate(String documentId, Client newClient, Vehicle newVehicle, Integer updateOption) {
         Log.e("UpdateOption"," " + updateOption);
         DocumentReference idRef =
                 db.collection("userData")
@@ -157,5 +153,5 @@ public class ServiceOrderActivity extends AppCompatActivity {
                 }
             }
         });
-        }
+        }*/
 }

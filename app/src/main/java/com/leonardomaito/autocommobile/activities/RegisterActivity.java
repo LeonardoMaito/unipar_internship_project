@@ -32,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private RegisterController registerController = new RegisterController();
 
+    private Boolean newUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,11 +70,16 @@ public class RegisterActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 if (task.isSuccessful()) {
+
                                                     User user = new User(registerController.getEmail(), registerController.getPassword());
+
                                                     db.collection("user")
                                                             .add(user);
-                                                    FirebaseAuth.getInstance().signOut();
-                                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+
+                                                    newUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                                                    Intent loginIntent = new Intent(RegisterActivity.this, MenuActivity.class);
+                                                    loginIntent.putExtra("newUser", newUser);
+                                                    startActivity(loginIntent);
                                                     finish();
                                                 }
                                             }

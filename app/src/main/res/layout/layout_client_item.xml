@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:showIn="@layout/activity_os"
+    tools:showIn="@layout/activity_client_menu"
     app:cardBackgroundColor="@color/white"
     android:background="@drawable/custom_card_view">
 
@@ -20,17 +20,17 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageClientView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/custom_os_icon"
+            app:srcCompat="@drawable/custom_client_icon"
             android:paddingLeft="5dp"/>
 
         <TextView
-            android:id="@+id/osIDItem"
+            android:id="@+id/clientIdItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -38,51 +38,50 @@
             android:text="N 00000"
             android:textColor="@color/autocom_blue"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/osDateItem"
+            app:layout_constraintEnd_toStartOf="@+id/clientPhoneItem"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/imageClientView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/osDateItem"
+            android:id="@+id/clientPhoneItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="8"
-            android:textAlignment="center"
+            android:text="(44) 99900-6777"
             android:textColor="@color/autocom_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.986"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.878"
+            app:layout_constraintStart_toEndOf="@+id/imageClientView"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.275" />
+            app:layout_constraintVertical_bias="0.214" />
 
         <TextView
-            android:id="@+id/osClientNameItem"
+            android:id="@+id/clientNameItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textColor="@color/autocom_blue"
+            android:text="Nome do Cliente"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/osIDItem"
+            app:layout_constraintStart_toEndOf="@+id/imageClientView"
+            app:layout_constraintTop_toBottomOf="@+id/clientIdItem"
             app:layout_constraintVertical_bias="0.111" />
 
         <TextView
-            android:id="@+id/osValueItem"
+            android:id="@+id/clientCpfItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:text="R$ 10,000"
+            android:text="000.000.000-00"
             android:textColor="@color/autocom_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.791"
-            app:layout_constraintStart_toEndOf="@+id/osClientNameItem"
-            app:layout_constraintTop_toBottomOf="@+id/osDateItem"
+            app:layout_constraintStart_toEndOf="@+id/clientNameItem"
+            app:layout_constraintTop_toBottomOf="@+id/clientPhoneItem"
             app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
-

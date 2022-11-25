@@ -16,6 +16,33 @@
         android:minHeight="720dp">
 
         <TextView
+            android:id="@+id/tvCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:labelFor="@id/etClientInput"
+            android:text="Cliente"
+            android:textColor="@color/autocom_blue"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <AutoCompleteTextView
+            android:id="@+id/acClient"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/custom_border"
+            android:minHeight="40dp"
+            android:textColor="@color/autocom_blue"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
+            app:layout_constraintTop_toBottomOf="@+id/tvCliente" />
+
+        <TextView
             android:id="@+id/tvServiceOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +80,7 @@
             android:id="@+id/tvBrand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="92dp"
+            android:layout_marginTop="150dp"
             android:text="Marca"
             android:textColor="@color/autocom_blue"
             android:textSize="30sp"
@@ -73,13 +100,13 @@
             android:ems="17"
             android:inputType="text"
             android:minHeight="48dp"
+            android:paddingLeft="8dp"
             android:textColor="@color/autocom_blue"
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
-            android:paddingLeft="8dp"
             app:layout_constraintBottom_toBottomOf="@id/tvChassi"
             app:layout_constraintEnd_toEndOf="@id/glRightMargin"
-            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@id/glLeftMargin"
             app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
 
@@ -93,7 +120,7 @@
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@id/etChassiInput"
             app:layout_constraintEnd_toEndOf="@id/glRightMargin"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="@id/glLeftMargin"
             app:layout_constraintTop_toBottomOf="@+id/etBrandInput" />
 
@@ -112,13 +139,13 @@
             android:textColor="@color/autocom_blue"
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
-            app:mask="___ _____ _ ________ "
-            app:maskStyle="completable"
-            app:maskCharacter="_"
             app:layout_constraintEnd_toEndOf="@id/glRightMargin"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/glLeftMargin"
-            app:layout_constraintTop_toBottomOf="@+id/tvChassi" />
+            app:layout_constraintTop_toBottomOf="@+id/tvChassi"
+            app:mask="___ _____ _ ________ "
+            app:maskCharacter="_"
+            app:maskStyle="completable" />
 
         <TextView
             android:id="@+id/tvKm"
@@ -146,11 +173,11 @@
             android:ems="8"
             android:inputType="number"
             android:minHeight="48dp"
+            android:paddingLeft="8dp"
             android:textAlignment="viewStart"
             android:textColor="@color/autocom_blue"
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
-            android:paddingLeft="8dp"
             app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
             app:layout_constraintStart_toEndOf="@id/etColorInput"
             app:layout_constraintTop_toBottomOf="@+id/tvKm" />
@@ -163,11 +190,11 @@
             android:text="Cor"
             android:textColor="@color/autocom_blue"
             android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/etColorInput"
             app:layout_constraintEnd_toStartOf="@id/glRightMargin"
-            app:layout_constraintHorizontal_bias="0.194"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="@id/glLeftMargin"
-            app:layout_constraintTop_toBottomOf="@+id/etModelNumber"
-            app:layout_constraintBottom_toTopOf="@id/etColorInput"/>
+            app:layout_constraintTop_toBottomOf="@+id/etModelNumber" />
 
         <EditText
             android:id="@+id/etColorInput"
@@ -179,11 +206,11 @@
             android:ems="8"
             android:inputType="text"
             android:minHeight="48dp"
+            android:paddingLeft="8dp"
             android:textAlignment="viewStart"
             android:textColor="@color/autocom_blue"
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
-            android:paddingLeft="8dp"
             app:layout_constraintEnd_toStartOf="@id/etKmInput"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
@@ -214,15 +241,15 @@
             android:ems="8"
             android:inputType="text"
             android:minHeight="48dp"
+            android:paddingLeft="8dp"
             android:textAlignment="viewStart"
             android:textColor="@color/autocom_blue"
             android:textStyle="bold"
-            android:paddingLeft="8dp"
+            app:layout_constraintBottom_toTopOf="@id/tvColor"
             app:layout_constraintEnd_toStartOf="@+id/etYearInput"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
-            app:layout_constraintTop_toBottomOf="@id/tvModelo"
-            app:layout_constraintBottom_toTopOf="@id/tvColor"/>
+            app:layout_constraintTop_toBottomOf="@id/tvModelo" />
 
         <TextView
             android:id="@+id/tvYear"
@@ -250,31 +277,32 @@
             android:ems="8"
             android:inputType="number"
             android:minHeight="48dp"
+            android:paddingLeft="8dp"
             android:textAlignment="viewStart"
             android:textColor="@color/autocom_blue"
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
-            android:paddingLeft="8dp"
+            app:layout_constraintBottom_toTopOf="@id/tvKm"
             app:layout_constraintEnd_toStartOf="@id/glRightMargin"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/etModelNumber"
-            app:layout_constraintTop_toBottomOf="@id/tvYear"
-            app:layout_constraintBottom_toTopOf="@id/tvKm"/>
+            app:layout_constraintTop_toBottomOf="@id/tvYear" />
 
         <android.widget.Button
             android:id="@+id/btNextOs2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/custom_button"
             android:maxHeight="40dp"
             android:minWidth="200dp"
             android:minHeight="50dp"
-            android:text="Avançar"
+            android:text="Próximo"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.509"
             app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
-            app:layout_constraintTop_toBottomOf="@+id/etColorInput" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glRightMargin"
@@ -289,6 +317,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.06" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="694dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

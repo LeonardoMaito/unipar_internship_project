@@ -20,9 +20,14 @@ package="autocommobile">
         android:name="com.leonardomaito.autocommobile.activities.ClientActivity"
         android:exported="false" />
     <activity
+        android:name="com.leonardomaito.autocommobile.activities.ViewClientActivity"
+        android:exported="false" />
+    <activity
         android:name="com.leonardomaito.autocommobile.activities.RegisterActivity"
-        android:exported="false"
-        />
+        android:exported="false" />
+    <activity
+        android:name="com.leonardomaito.autocommobile.activities.ClientMenuActivity"
+        android:exported="false" />
     <activity
         android:name="com.leonardomaito.autocommobile.activities.VehicleActivity"
         android:exported="false" />
@@ -46,3 +51,4 @@ package="autocommobile">
     </activity>
 </application>
 </manifest>
+
