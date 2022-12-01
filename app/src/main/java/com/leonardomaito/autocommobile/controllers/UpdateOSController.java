@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.leonardomaito.autocommobile.models.Client;
+import com.leonardomaito.autocommobile.models.ClientOs;
 import com.leonardomaito.autocommobile.models.ServiceDocument;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
@@ -24,7 +25,7 @@ public class UpdateOSController {
     private String osService;
     private String osObservation;
     private String osPaymentForm;
-    private int id;
+    private String id;
     private double osValue;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -32,7 +33,7 @@ public class UpdateOSController {
 
 
     public void returnNewServiceOrder(EditText etService, EditText etObservation, EditText etPaymentForm
-            , Client newClient, Vehicle newVehicle, MaskEditText etDate, EditText etValue, String docId){
+            , ClientOs newClient, Vehicle newVehicle, MaskEditText etDate, EditText etValue, String docId){
 
         DocumentReference idRef =
                 db.collection("userData")

@@ -24,10 +24,11 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.leonardomaito.autocommobile.adapters.AutoCompleteAdapter;
+import com.leonardomaito.autocommobile.adapters.ClientAutoCompleteAdapter;
 import com.leonardomaito.autocommobile.controllers.VehicleController;
 import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ClientDocument;
+import com.leonardomaito.autocommobile.models.ClientOs;
 import com.santalu.maskara.widget.MaskEditText;
 
 import java.util.ArrayList;
@@ -46,12 +47,12 @@ public class VehicleActivity extends AppCompatActivity {
     private EditText etKm;
 
     private AutoCompleteTextView acClient;
-    private List<Client> acClientList = new ArrayList<>();
-    private AutoCompleteAdapter autoCompleteAdapter;
+    private List<ClientOs> acClientList = new ArrayList<>();
+    private ClientAutoCompleteAdapter clientAutoCompleteAdapter;
 
     private VehicleController vehicleController = new VehicleController();
 
-    private Client client;
+    private ClientOs client;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -79,18 +80,17 @@ public class VehicleActivity extends AppCompatActivity {
         etKm = findViewById(R.id.etKmInput);
         acClient = findViewById(R.id.acClient);
 
-        autoCompleteAdapter = new AutoCompleteAdapter(this, acClientList);
-        acClient.setAdapter(autoCompleteAdapter);
+        clientAutoCompleteAdapter = new ClientAutoCompleteAdapter(this, acClientList);
+        acClient.setAdapter(clientAutoCompleteAdapter);
 
         acClient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                 client = new Client.ClientBuilder(acClientList.get(i).getName(),
-                        acClientList.get(i).getCpf(), acClientList.get(i).getId())
-                        .address(acClientList.get(i).getAddress())
-                        .telephone(acClientList.get(i).getTelephone())
-                        .build();
+                 client = new ClientOs(acClientList.get(i).getName(),acClientList.get(i)
+                         .getAddress(),acClientList.get(i).getTelephone(),
+                        acClientList.get(i).getCpf(), acClientList.get(i).getId());
+
 
                 Log.e("NewClient", " " +  client.toString());
             }
@@ -121,17 +121,16 @@ public class VehicleActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Client clientDocument = document.toObject(ClientDocument.class).client;
-
                                 Log.d("DB success", document.getId() + " => " + document.getData());
                                 String name = clientDocument.getName();
                                 String cpf =clientDocument.getCpf();
                                 String address = clientDocument.getAddress();
                                 String phone = clientDocument.getTelephone();
-                                //Integer id = Integer.parseInt(document.getString("id"));
+                                String id = document.getId();
 
-                                Client newClient = new Client.ClientBuilder(name, cpf, 0).telephone(phone).address(address).build();
+                                ClientOs newClient = new ClientOs(name,address, phone, cpf, id);
                                 acClientList.add(newClient);
-                                autoCompleteAdapter.updateList(acClientList);
+                                clientAutoCompleteAdapter.updateList(acClientList);
 
                             }
                         } else {

@@ -3,14 +3,10 @@ package com.leonardomaito.autocommobile.controllers;
 import android.util.Patterns;
 import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterController {
 
-    private FirebaseAuth auth;
     private String email, password;
-    private FirebaseFirestore db;
 
     public boolean checkAllFields(EditText edEmail, EditText edPassword) {
 

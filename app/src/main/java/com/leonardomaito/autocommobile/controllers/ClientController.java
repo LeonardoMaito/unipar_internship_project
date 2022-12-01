@@ -3,6 +3,8 @@ package com.leonardomaito.autocommobile.controllers;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,9 +23,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.leonardomaito.autocommobile.activities.ClientActivity;
+import com.leonardomaito.autocommobile.activities.ClientMenuActivity;
 import com.leonardomaito.autocommobile.activities.OsRecyclerActivity;
-import com.leonardomaito.autocommobile.adapters.ClientAdapter;
-import com.leonardomaito.autocommobile.adapters.ServiceOrderAdapter;
+import com.leonardomaito.autocommobile.adapters.ClientSearchAdapter;
 import com.leonardomaito.autocommobile.models.Client;
 import com.santalu.maskara.widget.MaskEditText;
 
@@ -62,7 +64,7 @@ public class ClientController {
              clientAddress = etClientAddress.getText().toString();
              clientTelephone = etClientTelephone.getText().toString();
 
-         Client newClient = new Client.ClientBuilder(clientName, clientCpf, 0)
+         Client newClient = new Client.ClientBuilder(clientName, clientCpf)
                  .address(clientAddress)
                  .telephone(clientTelephone)
                  .build();
@@ -106,7 +108,7 @@ public class ClientController {
         });
     }
 
-    public void deleteDataFromFirestore(ClientAdapter.ViewHolder holder, String documentId){
+    public void deleteDataFromFirestore(ClientSearchAdapter.ViewHolder holder, String documentId){
 
         AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
         alert.setCancelable(false);
@@ -143,7 +145,7 @@ public class ClientController {
 
     }
 
-    public void updateDataFromFirestore(ClientAdapter.ViewHolder holder, String documentId){
+    public void updateDataFromFirestore(ClientSearchAdapter.ViewHolder holder, String documentId){
 
         AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
         alert.setCancelable(false);
@@ -156,7 +158,7 @@ public class ClientController {
                 Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
                 updateClientActivity.putExtra("documentId", documentId);
                 holder.itemView.getContext().startActivity(updateClientActivity);
-                OsRecyclerActivity.self_intent.finish();
+                ClientMenuActivity.self_intent.finish();
 
             }
         });
@@ -185,10 +187,31 @@ public class ClientController {
     }
 
     public boolean checkAllClientFields(EditText etClientName, MaskEditText etClientCpf){
-        int yourDesiredLength = 3;
 
-        if (etClientName.getText().length() < yourDesiredLength) {
+        String blockedCharacters = "#|%*!=+-/?[]{},@%¨.;";
+        int minChar = 3;
+        int maxChar = 25;
+
+        InputFilter filter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence charSequence, int i, int i1, Spanned spanned, int i2, int i3) {
+                if (charSequence != null && blockedCharacters.contains(("" + charSequence))) {
+                    etClientName.setError("Caracteres Inválidos");
+                    return "";
+                }
+                return null;
+            }
+        };
+        etClientName.setFilters(new InputFilter[]{filter});
+
+        if (etClientName.getText().length() < minChar) {
             etClientName.setError("Mínimo de 3 Caracteres");
+            etClientName.requestFocus();
+            return false;
+        }
+
+        else if(etClientName.getText().length() > maxChar){
+            etClientName.setError("Máximo de 25 Caracteres");
             etClientName.requestFocus();
             return false;
         }

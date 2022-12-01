@@ -61,7 +61,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
   public void loginVerification() {
-            mAuth.signInWithEmailAndPassword(loginController.getEmail(),loginController.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(loginController.getEmail(),loginController.getPassword())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){

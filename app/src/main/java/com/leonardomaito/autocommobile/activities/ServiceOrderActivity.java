@@ -1,29 +1,26 @@
 package com.leonardomaito.autocommobile.activities;
 
-import androidx.annotation.NonNull;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.leonardomaito.autocommobile.controllers.ServiceOrderController;
 import com.leonardomaito.autocommobile.controllers.UpdateOSController;
 import com.leonardomaito.autocommobile.models.Client;
-import com.leonardomaito.autocommobile.models.ServiceDocument;
-import com.leonardomaito.autocommobile.models.ServiceOrder;
+import com.leonardomaito.autocommobile.models.ClientOs;
 import com.leonardomaito.autocommobile.models.Vehicle;
 import com.santalu.maskara.widget.MaskEditText;
 
@@ -62,7 +59,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_os_service);
 
         Bundle data = getIntent().getExtras();
-        Client newClient = data.getParcelable("novoCliente");
+        ClientOs newClient = data.getParcelable("novoCliente");
         Vehicle newVehicle = data.getParcelable("novoCarro");
 
         documentId = data.getString("documentId");
@@ -85,7 +82,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
         }
 
 
-    private void setView(Client newClient, Vehicle newVehicle) {
+    private void setView(ClientOs newClient, Vehicle newVehicle) {
 
         returnMenuOs.setOnClickListener(new View.OnClickListener() {
             @Override

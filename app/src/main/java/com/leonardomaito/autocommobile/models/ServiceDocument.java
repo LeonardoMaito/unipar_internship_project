@@ -18,11 +18,6 @@ public class ServiceDocument {
         return serviceOrder;
     }
 
-    @PropertyName("id")
-    public Integer getId() {
-        return serviceOrder.getId();
-    }
-
     @PropertyName("serviceOrder")
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;

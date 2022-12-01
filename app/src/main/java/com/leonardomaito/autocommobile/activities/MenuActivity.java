@@ -22,13 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import com.leonardomaito.autocommobile.models.ReservedClientId;
-import com.leonardomaito.autocommobile.models.ReservedID;
 
 import autocommobile.R;
 
@@ -63,7 +58,6 @@ public class MenuActivity extends AppCompatActivity {
         btOpenOs = findViewById(R.id.btMenuOs);
         btOpenClient = findViewById(R.id.btOpenClient);
 
-        verifyReservedId(user.getUid());
         setUserName(newUser);
 
     }
@@ -121,39 +115,6 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(clientMenuIntent);
     }
 
-    public void verifyReservedId(String uID){
-
-        db.collection("userData").document(uID).collection("reservedID")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            if(task.getResult().size() > 0) {
-                                for (DocumentSnapshot document : task.getResult()) {
-                                    Log.d("ReservedID", "Já Existe");
-                                }
-                            } else {
-                                DocumentReference idServiceReference = db.collection("userData")
-                                        .document(uID).collection("reservedID")
-                                        .document("reservedServiceId");
-
-                                ReservedID reservedServiceId = new ReservedID(0);
-                                idServiceReference.set(reservedServiceId);
-
-                                DocumentReference idClientReference = db.collection("userData")
-                                        .document(uID).collection("reservedID")
-                                        .document("reservedClientId");
-
-                                ReservedClientId reservedClientId = new ReservedClientId(0);
-                                idClientReference.set(reservedClientId);
-                            }
-                        } else {
-                            Log.d("FTAG", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-    }
 
     public void logOut(View view) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);

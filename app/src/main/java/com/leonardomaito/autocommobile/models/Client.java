@@ -11,7 +11,7 @@ public class Client implements Parcelable {
     private String address;
     private String telephone;
     private String cpf;
-    private Integer id;
+
 
     public Client() {
     }
@@ -21,7 +21,6 @@ public class Client implements Parcelable {
         this.cpf = clientBuilder.cpf;
         this.address = clientBuilder.address;
         this.telephone = clientBuilder.telephone;
-        this.id = clientBuilder.id;
 
     }
 
@@ -30,7 +29,6 @@ public class Client implements Parcelable {
         cpf = in.readString();
         address = in.readString();
         telephone = in.readString();
-        id = in.readInt();
 
     }
 
@@ -78,14 +76,6 @@ public class Client implements Parcelable {
         this.cpf = cpf;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -97,7 +87,6 @@ public class Client implements Parcelable {
         parcel.writeString(cpf);
         parcel.writeString(address);
         parcel.writeString(telephone);
-        parcel.writeInt(id);
 
     }
 
@@ -107,8 +96,7 @@ public class Client implements Parcelable {
                 "Nome= " + name +
                 "\n Endereco= " + address +
                 "\n Telefone= " + telephone +
-                "\n CPF= " + cpf +
-                 "\n ID= " + id;
+                "\n CPF= " + cpf;
     }
 
     public static class ClientBuilder{
@@ -117,12 +105,10 @@ public class Client implements Parcelable {
         private String address;
         private String telephone;
         private final String cpf;
-        private Integer id;
 
-        public ClientBuilder(String name,String cpf, Integer id){
+        public ClientBuilder(String name,String cpf){
             this.name = name;
             this.cpf = cpf;
-            this.id = id;
         }
 
         public ClientBuilder address(String address){

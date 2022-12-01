@@ -17,6 +17,7 @@ public class ClientDocument {
     public Client getClient() {
         return client;
     }
+
     @PropertyName("client")
     public void setClient(Client client) {
         this.client = client;

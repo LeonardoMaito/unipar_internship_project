@@ -3,7 +3,6 @@ package com.leonardomaito.autocommobile.controllers;
 import android.util.Patterns;
 import android.widget.EditText;
 
-
 public class LoginController {
 
     private String email,password;

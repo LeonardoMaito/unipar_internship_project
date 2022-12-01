@@ -4,6 +4,7 @@ package com.leonardomaito.autocommobile.controllers;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -11,22 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.leonardomaito.autocommobile.activities.ClientActivity;
 import com.leonardomaito.autocommobile.activities.OsRecyclerActivity;
-import com.leonardomaito.autocommobile.adapters.ServiceOrderAdapter;
-import com.leonardomaito.autocommobile.models.Client;
+import com.leonardomaito.autocommobile.adapters.ServiceSearchAdapter;
+import com.leonardomaito.autocommobile.models.ClientOs;
 import com.leonardomaito.autocommobile.models.ServiceOrder;
 import com.leonardomaito.autocommobile.models.Vehicle;
 import com.santalu.maskara.widget.MaskEditText;
@@ -42,20 +39,22 @@ public class ServiceOrderController {
     private String osObservation;
     private String osPaymentForm;
     private double osValue;
-    private long idValue;
     private Map<String, Object> data = new HashMap<>();
+
 
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     private CollectionReference docRef =
-                     db.collection("userData")
+            db.collection("userData")
                     .document(user.getUid())
                     .collection("ServiceOrder");
 
     private AlertDialog alertDialog;
 
+
     public void returnNewServiceOrder(EditText etService, EditText etObservation, EditText etPaymentForm
-    , Client newClient, Vehicle newVehicle, MaskEditText etDate, EditText etValue){
+    , ClientOs newClient, Vehicle newVehicle, MaskEditText etDate, EditText etValue){
 
         osService = etService.getText().toString();
         osObservation = etObservation.getText().toString();
@@ -65,7 +64,6 @@ public class ServiceOrderController {
         ServiceOrder newServiceOrder = new ServiceOrder.ServiceOrderBuilder(newClient,
                 newVehicle,osService,osPaymentForm, osValue, String.valueOf(etDate.getText()))
                 .observation(osObservation)
-                .id(0)
                 .build();
 
         sendDataToFirestore(newServiceOrder);
@@ -99,38 +97,21 @@ public class ServiceOrderController {
 
     public void sendDataToFirestore(ServiceOrder serviceOrder){
 
-        CollectionReference docRef =
+       CollectionReference docRef =
                 db.collection("userData")
                         .document(user.getUid())
                         .collection("ServiceOrder");
 
-        DocumentReference idRef =
-                db.collection("userData")
-                        .document(user.getUid())
-                        .collection("reservedID")
-                        .document("reservedServiceId");
-
-        idRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    idValue =  (long) document.get("id");
-
-                }
-            }
-        });
-
         data.put("serviceOrder", serviceOrder);
         docRef.add(data).addOnSuccessListener(documentReference -> {
             String id = documentReference.getId();
-            docRef.document(id).update("serviceOrder.id", FieldValue.increment(idValue));
-            idRef.update("id", FieldValue.increment(1));
+            docRef.document(id).update("serviceOrder.id", id);
+
 
         });
     }
 
-    public void deleteDataFromFirestore(ServiceOrderAdapter.ViewHolder holder, String documentId){
+    public void deleteDataFromFirestore(ServiceSearchAdapter.ViewHolder holder, String documentId){
 
         AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
         alert.setCancelable(false);
@@ -167,7 +148,7 @@ public class ServiceOrderController {
 
     }
 
-    public void updateDataFromFirestore(Integer position, ServiceOrderAdapter.ViewHolder holder, String documentId){
+    public void updateDataFromFirestore(Integer position, ServiceSearchAdapter.ViewHolder holder, String documentId){
 
         AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
         alert.setCancelable(false);

@@ -5,14 +5,14 @@ import android.os.Parcelable;
 
 public class ServiceOrder implements Parcelable {
 
-    public Client client;
+    public ClientOs client;
     public Vehicle vehicle;
     private String service;
     private String observation;
     private String paymentForm;
     private String date;
     private double totalValue;
-    private int id;
+    private String id;
 
     public ServiceOrder() {
     }
@@ -37,7 +37,7 @@ public class ServiceOrder implements Parcelable {
         paymentForm = in.readString();
         date = in.readString();
         totalValue = in.readDouble();
-        id = in.readInt();
+        id = in.readString();
     }
 
     public static final Creator<ServiceOrder> CREATOR = new Creator<ServiceOrder>() {
@@ -68,19 +68,19 @@ public class ServiceOrder implements Parcelable {
         this.totalValue = totalValue;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-   public Client getClient() {
+   public ClientOs getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientOs client) {
         this.client = client;
     }
 
@@ -130,20 +130,20 @@ public class ServiceOrder implements Parcelable {
         parcel.writeString(paymentForm);
         parcel.writeString(date);
         parcel.writeDouble(totalValue);
-        parcel.writeInt(id);
+        parcel.writeString(id);
     }
     public static class ServiceOrderBuilder {
 
         private Vehicle vehicle;
-        private Client client;
+        private ClientOs client;
         private final String service;
         private final String paymentForm;
         private final double value;
         private final String date;
         private String observation;
-        private  int id;
+        private String id;
 
-        public ServiceOrderBuilder(Client client, Vehicle vehicle,
+        public ServiceOrderBuilder(ClientOs client, Vehicle vehicle,
                                    String service, String paymentForm
                                    ,double value, String date) {
             this.client = client;
@@ -153,7 +153,7 @@ public class ServiceOrder implements Parcelable {
             this.value = value;
             this.date = date;
         }
-        public ServiceOrder.ServiceOrderBuilder id(int id) {
+        public ServiceOrder.ServiceOrderBuilder id(String id) {
             this.id = id;
             return this;
         }

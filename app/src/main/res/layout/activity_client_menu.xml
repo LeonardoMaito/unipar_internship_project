@@ -9,14 +9,14 @@
     android:background="@color/white"
     tools:context="com.leonardomaito.autocommobile.activities.ClientMenuActivity">
 
-    <include layout="@layout/layout_header" />
+    <include layout="@layout/layout_header_search" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glRecyclerLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="78dp" />
+        app:layout_constraintGuide_begin="124dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewClient"
