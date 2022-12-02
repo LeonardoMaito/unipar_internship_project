@@ -130,7 +130,7 @@
             android:ems="17"
             android:importantForAutofill="no"
             android:inputType="phone"
-            app:mask="(__) _________"
+            app:mask="(__) _____-____"
             app:maskStyle="normal"
             app:maskCharacter="_"
             android:minHeight="48dp"

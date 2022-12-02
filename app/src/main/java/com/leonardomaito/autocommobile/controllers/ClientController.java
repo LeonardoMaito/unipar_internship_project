@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.leonardomaito.autocommobile.activities.ClientMenuActivity;
 import com.leonardomaito.autocommobile.activities.OsRecyclerActivity;
 import com.leonardomaito.autocommobile.adapters.ClientSearchAdapter;
 import com.leonardomaito.autocommobile.models.Client;
+import com.leonardomaito.autocommobile.models.ClientDocument;
 import com.santalu.maskara.widget.MaskEditText;
 
 import java.util.HashMap;
@@ -52,12 +54,14 @@ public class ClientController {
                     .document(user.getUid())
                     .collection("Client");
 
-    private AlertDialog alertDialog;
+    private boolean result;
+
+    private int updateOption;
 
      public Client returnNewClient(EditText etClientName,
                                    MaskEditText etClientCpf,
                                    EditText etClientAddress,
-                                   EditText etClientTelephone){
+                                   EditText etClientTelephone, int updateOption, String documentId){
 
              clientName = etClientName.getText().toString();
              clientCpf = etClientCpf.getText().toString();
@@ -69,7 +73,14 @@ public class ClientController {
                  .telephone(clientTelephone)
                  .build();
 
-         sendDataToFirestore(newClient);
+         if(updateOption == 0){
+             sendDataToFirestore(newClient);
+         }
+         else{
+             updateDataFromFirestore(documentId, newClient);
+         }
+
+
 
          return newClient;
 
@@ -82,107 +93,26 @@ public class ClientController {
                         .document(user.getUid())
                         .collection("Client");
 
-        DocumentReference idRef =
-                db.collection("userData")
-                        .document(user.getUid())
-                        .collection("reservedID")
-                        .document("reservedClientId");
-
-        idRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    idValue =  (long) document.get("id");
-
-                }
-            }
-        });
-
         data.put("client", newClient);
         docRef.add(data).addOnSuccessListener(documentReference -> {
             String id = documentReference.getId();
-            docRef.document(id).update("client.id", FieldValue.increment(idValue));
-            idRef.update("id", FieldValue.increment(1));
+            docRef.document(id).update("client.id", id);
 
         });
     }
 
-    public void deleteDataFromFirestore(ClientSearchAdapter.ViewHolder holder, String documentId){
+    public void updateDataFromFirestore(String documentId, Client newClient){
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
-        alert.setCancelable(false);
-        alert.setTitle("Excluir Cliente");
-        alert.setMessage("Você tem certeza que quer excluir esse cliente?");
-        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                docRef.document(documentId)
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(holder.itemView.getContext(), "Excluido com sucesso!", Toast.LENGTH_SHORT).show();
+        DocumentReference docRef =
+                db.collection("userData")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("Client")
+                        .document(documentId);
 
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(holder.itemView.getContext(), "Erro ao tentar excluir!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        });
-        alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                alertDialog.dismiss();
-            }
-        });
-        alertDialog = alert.create();
-        alertDialog.show();
-
-    }
-
-    public void updateDataFromFirestore(ClientSearchAdapter.ViewHolder holder, String documentId){
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(holder.itemView.getContext());
-        alert.setCancelable(false);
-        alert.setTitle("Alterar ou Visualizar Cliente");
-        alert.setMessage("Você deseja alterar ou editar o cadastro do cliente?");
-        alert.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
-                updateClientActivity.putExtra("documentId", documentId);
-                holder.itemView.getContext().startActivity(updateClientActivity);
-                ClientMenuActivity.self_intent.finish();
-
-            }
-        });
-        alert.setNeutralButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                alertDialog.dismiss();
-
-            }
-        });
-        alert.setNegativeButton("Visualizar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                Intent updateClientActivity  = new Intent(holder.itemView.getContext(), ClientActivity.class);
-                updateClientActivity.putExtra("documentId", documentId);
-                holder.itemView.getContext().startActivity(updateClientActivity);
-                OsRecyclerActivity.self_intent.finish();
-
-            }
-        });
-        alertDialog = alert.create();
-        alertDialog.show();
+        docRef.update("client.name", newClient.getName());
+        docRef.update("client.cpf", newClient.getCpf());
+        docRef.update("client.address", newClient.getAddress());
+        docRef.update("client.telephone", newClient.getTelephone());
 
     }
 

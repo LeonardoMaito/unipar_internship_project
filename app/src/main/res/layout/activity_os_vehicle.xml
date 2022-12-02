@@ -105,9 +105,9 @@
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/tvChassi"
-            app:layout_constraintEnd_toEndOf="@id/glRightMargin"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@id/glLeftMargin"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
             app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
 
         <TextView
@@ -139,9 +139,9 @@
             android:textColor="@color/autocom_blue"
             android:textColorHint="@color/autocom_blue"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/glRightMargin"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/glLeftMargin"
+            app:layout_constraintEnd_toStartOf="@+id/glRightMargin"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="@+id/glLeftMargin"
             app:layout_constraintTop_toBottomOf="@+id/tvChassi"
             app:mask="___ _____ _ ________ "
             app:maskCharacter="_"

@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -29,6 +31,9 @@ import com.leonardomaito.autocommobile.controllers.VehicleController;
 import com.leonardomaito.autocommobile.models.Client;
 import com.leonardomaito.autocommobile.models.ClientDocument;
 import com.leonardomaito.autocommobile.models.ClientOs;
+import com.leonardomaito.autocommobile.models.ServiceDocument;
+import com.leonardomaito.autocommobile.models.ServiceOrder;
+import com.leonardomaito.autocommobile.models.Vehicle;
 import com.santalu.maskara.widget.MaskEditText;
 
 import java.util.ArrayList;
@@ -53,6 +58,7 @@ public class VehicleActivity extends AppCompatActivity {
     private VehicleController vehicleController = new VehicleController();
 
     private ClientOs client;
+    private Vehicle vehicle;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,14 +68,15 @@ public class VehicleActivity extends AppCompatActivity {
                     .collection("Client");
 
     public static Activity self_intent;
-    
+
+    private int updateOption;
+    private String documentId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_os_vehicle);
         self_intent = this;
-
-        getDataFromFire();
 
         btNext = findViewById(R.id.btNextOs2);
         etBrand = findViewById(R.id.etBrandInput);
@@ -80,38 +87,166 @@ public class VehicleActivity extends AppCompatActivity {
         etKm = findViewById(R.id.etKmInput);
         acClient = findViewById(R.id.acClient);
 
-        clientAutoCompleteAdapter = new ClientAutoCompleteAdapter(this, acClientList);
-        acClient.setAdapter(clientAutoCompleteAdapter);
+        try {
+            Bundle data = getIntent().getExtras();
+            documentId = data.getString("documentId");
+            updateOption = data.getInt("updateOption");
 
-        acClient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        } catch (Exception e) {
+            Log.e("TAG", "Sem bundle");
+        }
+        Log.e("Updateoption", "" + updateOption);
+
+        if (updateOption == 1) {
+            setViewId(documentId);
+
+        } else if (updateOption == 2) {
+            setViewForUpdate(documentId);
+
+        } else {
+
+            getDataFromFire();
+            clientAutoCompleteAdapter = new ClientAutoCompleteAdapter(this, acClientList);
+            acClient.setAdapter(clientAutoCompleteAdapter);
+
+            acClient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    client = new ClientOs(acClientList.get(i).getName(), acClientList.get(i)
+                            .getAddress(), acClientList.get(i).getTelephone(),
+                            acClientList.get(i).getCpf(), acClientList.get(i).getId());
+
+                }
+            });
+
+            btNext.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onClick(View view) {
+
+                    Intent createServiceOrderActivity = new Intent(getApplicationContext(), ServiceOrderActivity.class);
+
+                    createServiceOrderActivity.putExtra("newVehicle", vehicleController.returnNewVehicle(etBrand, etModel,
+                            etChassi, etYear, etColor, etKm));
+                    createServiceOrderActivity.putExtra("newClient", client);
+                    startActivity(createServiceOrderActivity);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent osRecycler = new Intent(getApplicationContext(), OsRecyclerActivity.class);
+        startActivity(osRecycler);
+        finish();
+
+    }
+
+    private void setViewId(String documentId) {
+
+        DocumentReference docRef =
+                db.collection("userData")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("ServiceOrder")
+                        .document(documentId);
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Result", "DocumentSnapshot data: " + document.getData());
+                        ServiceOrder serviceDocument = document.toObject(ServiceDocument.class).serviceOrder;
+                        acClient.setText(serviceDocument.getClient().getName());
+                        etBrand.setText(serviceDocument.getVehicle().getBrand());
+                        etModel.setText(serviceDocument.getVehicle().getModel());
+                        etChassi.setText(serviceDocument.getVehicle().getChassi());
+                        etYear.setText(String.valueOf(serviceDocument.getVehicle().getYear()));
+                        etColor.setText(serviceDocument.getVehicle().getColor());
+                        etKm.setText(String.valueOf(serviceDocument.getVehicle().getKm()));
 
-                 client = new ClientOs(acClientList.get(i).getName(),acClientList.get(i)
-                         .getAddress(),acClientList.get(i).getTelephone(),
-                        acClientList.get(i).getCpf(), acClientList.get(i).getId());
-
-
-                Log.e("NewClient", " " +  client.toString());
+                    }
+                }
             }
         });
+
+        acClient.setEnabled(false);
+        etBrand.setEnabled(false);
+        etModel.setEnabled(false);
+        etChassi.setEnabled(false);
+        etYear.setEnabled(false);
+        etColor.setEnabled(false);
+        etKm.setEnabled(false);
 
         btNext.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+                updateOption = 1;
+                Intent intent = new Intent(VehicleActivity.this, ServiceOrderActivity.class);
+                intent.putExtra("documentId", documentId);
+                intent.putExtra("updateOption", updateOption);
+                startActivity(intent);
+            }
+        });
+    }
 
-                Intent createServiceOrderActivity = new Intent(getApplicationContext(), ServiceOrderActivity.class);
+    private void setViewForUpdate(String documentId) {
 
-                createServiceOrderActivity.putExtra("novoCarro", vehicleController.returnNewVehicle(etBrand, etModel,
-                        etChassi, etYear, etColor, etKm));
-                createServiceOrderActivity.putExtra("novoCliente", client);
-                startActivity(createServiceOrderActivity);
+        DocumentReference idRef =
+                db.collection("userData")
+                        .document(user.getUid())
+                        .collection("ServiceOrder")
+                        .document(documentId);
+
+        idRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Result", "DocumentSnapshot data: " + document.getData());
+                        ServiceOrder serviceDocument = document.toObject(ServiceDocument.class).serviceOrder;
+                        acClient.setText(serviceDocument.getClient().getName());
+                        etBrand.setText(serviceDocument.getVehicle().getBrand());
+                        etModel.setText(serviceDocument.getVehicle().getModel());
+                        etChassi.setText(String.valueOf(serviceDocument.getVehicle().getChassi()));
+                        etYear.setText(String.valueOf(serviceDocument.getVehicle().getYear()));
+                        etColor.setText(serviceDocument.getVehicle().getColor());
+                        etKm.setText(String.valueOf(serviceDocument.getVehicle().getKm()));
+                        client = serviceDocument.getClient();
+                        vehicle = serviceDocument.getVehicle();
+                    }
+                }
+            }
+        });
+
+        acClient.setEnabled(false);
+
+        btNext.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                Vehicle newVehicle = vehicleController.returnNewVehicle(etBrand, etModel, etChassi, etYear, etColor, etKm);
+                Intent updateOs  = new Intent(getApplicationContext(), ServiceOrderActivity.class);
+
+                updateOs.putExtra("newClient", client);
+                updateOs.putExtra("newVehicle", newVehicle);
+                updateOs.putExtra("documentId", documentId);
+                updateOs.putExtra("updateOption", updateOption);
+
+                startActivity(updateOs);
             }
         });
     }
 
 
+
+    //NAO MEXER NESSE MÉTODO
     private void getDataFromFire() {
         docRef.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -139,49 +274,4 @@ public class VehicleActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    /*private void setViewForUpdate(String documentId, int updateOption, Client newClient) {
-
-        DocumentReference idRef =
-                db.collection("userData")
-                        .document(user.getUid())
-                        .collection("ServiceOrder")
-                        .document(documentId);
-
-        idRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("Result", "DocumentSnapshot data: " + document.getData());
-                        ServiceOrder serviceDocument = document.toObject(ServiceDocument.class).serviceOrder;
-                        etBrand.setText(serviceDocument.getVehicle().getBrand());
-                        etModel.setText(serviceDocument.getVehicle().getModel());
-                        etChassi.setText(String.valueOf(serviceDocument.getVehicle().getChassi()));
-                        etYear.setText(String.valueOf(serviceDocument.getVehicle().getYear()));
-                        etColor.setText(serviceDocument.getVehicle().getColor());
-                        etKm.setText(String.valueOf(serviceDocument.getVehicle().getKm()));
-                    }
-                }
-            }
-        });
-
-        startOsSecond.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View view) {
-
-                Intent updateOs  = new Intent(getApplicationContext(), ServiceOrderActivity.class);
-
-                updateOs.putExtra("novoCliente", newClient);
-                updateOs.putExtra("novoCarro", vehicleController.returnNewVehicle(etBrand,etModel,
-                        etChassi, etYear, etColor, etKm));
-                updateOs.putExtra("documentId", documentId);
-                updateOs.putExtra("updateOption", updateOption);
-
-                startActivity(updateOs);
-            }
-        });
-    }*/
 }

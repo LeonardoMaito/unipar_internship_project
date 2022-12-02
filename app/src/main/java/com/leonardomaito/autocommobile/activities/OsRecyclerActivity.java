@@ -84,6 +84,12 @@ public class OsRecyclerActivity extends AppCompatActivity {
         tvUser.setText(user.getDisplayName());
         osRecyclerView = findViewById(R.id.recyclerViewOs);
 
+        try{
+            VehicleActivity.self_intent.finish();
+        }catch(Exception e){
+            Log.e("Error","No intent");
+        }
+
         getDataFromFirestore();
         buildRecyclerView();
 

@@ -30,20 +30,6 @@
             android:paddingLeft="5dp"/>
 
         <TextView
-            android:id="@+id/osIDItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="N 00000"
-            android:textColor="@color/autocom_blue"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/osDateItem"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/osDateItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,11 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="12dp"
             android:textColor="@color/autocom_blue"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/osIDItem"
-            app:layout_constraintVertical_bias="0.111" />
+            app:layout_constraintStart_toEndOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/osValueItem"

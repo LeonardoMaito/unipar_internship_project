@@ -4,6 +4,7 @@ package com.leonardomaito.autocommobile.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,6 +43,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_menu);
 
         try {
@@ -54,6 +56,7 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         tvUser = findViewById(R.id.tvHeaderLoggedUser);
+        tvUser.setText(user.getDisplayName());
         tvMenu = findViewById(R.id.tvMainMenu);
         btOpenOs = findViewById(R.id.btMenuOs);
         btOpenClient = findViewById(R.id.btOpenClient);
